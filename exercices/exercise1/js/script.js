@@ -19,6 +19,11 @@ var feltTextureImage;
 var feltTextureImageX;
 var feltTextureImageY;
 
+// The image of a zigzag
+var zigzagImage;
+// The current position of the zigzag image
+var zigzagImageX;
+var zigzagImageY;
 
 // preload()
 //
@@ -27,9 +32,8 @@ var feltTextureImageY;
 function preload() {
   clownImage = loadImage("assets/images/clown.png");
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
+  zigzagImage = loadImage("assets/images/zigzag.png");
 }
-
-
 // setup()
 //
 // Set up the canvas, position the images, set the image mode.
@@ -46,6 +50,10 @@ function setup() {
   feltTextureImageX = width/2;
   feltTextureImageY = 0 - feltTextureImage.height/2;
 
+  //Start the zigzag image off screen
+  zigzagImageX = 0 - zigzagImage.height/2;
+  zigzagImageY = width/2;
+
   // We'll use imageMode CENTER for this script
   imageMode(CENTER);
 }
@@ -60,9 +68,14 @@ function draw() {
 
   // Move the felt image down by increasing its y position
   feltTextureImageY += 1;
+  // Move the zigzag image to the left
+  zigzagImageX += 1;
 
   // Display the felt image
   image(feltTextureImage,feltTextureImageX,feltTextureImageY);
+
+  //Display the zigzag image
+  image(zigzagImage,zigzagImageX,zigzagImageY);
 
   // Move the clown by moving it 1/10th of its current distance from the mouse
 
