@@ -25,6 +25,12 @@ var zigzagImage;
 var zigzagImageX;
 var zigzagImageY;
 
+// The image of the laughing face
+var laughImage;
+// The current position of the laughing face
+var laughImageX;
+var laughImageY;
+
 // preload()
 //
 // Load the two images we're using before the program starts
@@ -33,6 +39,7 @@ function preload() {
   clownImage = loadImage("assets/images/clown.png");
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
   zigzagImage = loadImage("assets/images/zigzag.png");
+  laughImage = loadImage("assets/images/laugh.png");
 }
 // setup()
 //
@@ -46,12 +53,17 @@ function setup() {
   clownImageX = width/2;
   clownImageY = height/2;
 
+  // Start the laughing image at the center of the canvas
+  laughImageX = width/2;
+  laughImageY = height/2;
+
+
   // Start the felt image perfectly off screen above the canvas
   feltTextureImageX = width/2;
   feltTextureImageY = 0 - feltTextureImage.height/2;
 
   //Start the zigzag image off screen
-  zigzagImageX = 0 - zigzagImage.height/2;
+  zigzagImageX = 0 - zigzagImage.width/2;
   zigzagImageY = width/2;
 
   // We'll use imageMode CENTER for this script
@@ -79,13 +91,24 @@ function draw() {
 
   // Move the clown by moving it 1/10th of its current distance from the mouse
 
-  // Calculate the distance in X and in Y
+  // Calculate the distance in X and in Y of the clownImage
   var xDistance = mouseX - clownImageX;
   var yDistance = mouseY - clownImageY;
+
+  // Calculate the distance in X and in Y of the laughing image
+  var xDistance = mouseX - laughImageX;
+  var yDistance = mouseY - laughImageY;
+
   // Add 1/10th of the x and y distance to the clown's current (x,y) location
   clownImageX = clownImageX + xDistance/10;
   clownImageY = clownImageY + yDistance/10;
 
-  // Display the clown image
+  // Add 1/10th of the x and y distance to the laughing image current (x,y) location
+  laughImageX = laughImageX + xDistance/10;
+  laughImageY = laughImageY + yDistance/10;
+
+  // Display the clown image and the laughing image
   image(clownImage,clownImageX,clownImageY);
+  image(laughImage,laughImageX,laughImageY);
+
 }
