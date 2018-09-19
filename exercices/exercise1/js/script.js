@@ -31,6 +31,12 @@ var laughImage;
 var laughImageX;
 var laughImageY;
 
+// The image of the crying face
+var cryImage;
+// The current position of the laughing face
+var cryImageX;
+var cryImageY;
+
 // preload()
 //
 // Load the two images we're using before the program starts
@@ -40,6 +46,7 @@ function preload() {
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
   zigzagImage = loadImage("assets/images/zigzag.png");
   laughImage = loadImage("assets/images/laugh.png");
+  cryImage = loadImage("assets/images/cry.png");
 }
 // setup()
 //
@@ -56,6 +63,11 @@ function setup() {
   // Start the laughing image at the center of the canvas
   laughImageX = width/2;
   laughImageY = height/2;
+
+  // Start the crying image at the center of the canvas
+  cryImageX = width/2;
+  cryImageY = height/2;
+
 
 
   // Start the felt image perfectly off screen above the canvas
@@ -99,6 +111,10 @@ function draw() {
   var xDistance = mouseX - laughImageX;
   var yDistance = mouseY - laughImageY;
 
+  // Calculate the distance in X and in Y of the crying image
+  var xDistance = mouseX - cryImageX;
+  var yDistance = mouseY - cryImageY;
+
   // Add 1/10th of the x and y distance to the clown's current (x,y) location
   clownImageX = clownImageX + xDistance/10;
   clownImageY = clownImageY + yDistance/10;
@@ -107,8 +123,14 @@ function draw() {
   laughImageX = laughImageX + xDistance/10;
   laughImageY = laughImageY + yDistance/10;
 
-  // Display the clown image and the laughing image
+  // Add 1/50th of the x and y distance to the laughing image current (x,y) location
+  cryImageX = cryImageX + xDistance/50;
+  cryImageY = cryImageY + yDistance/50;
+
+  // Display the clown image, the laughing image and the crying image
   image(clownImage,clownImageX,clownImageY);
   image(laughImage,laughImageX,laughImageY);
+  image(cryImage,cryImageX,cryImageY);
+  
 
 }
