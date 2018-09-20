@@ -60,6 +60,14 @@ function draw() {
   // A pink background
   background(255,220,220);
 
+  // Added text
+  text('DODGES '+dodges,400,50);
+  textAlign(CENTER);
+  textSize(20);
+  textStyle(BOLD);
+  textFont('FUTURA');
+
+
   // Default the avatar's velocity to 0 in case no key is pressed this frame
   avatarVX = 0;
   avatarVY = 0;
