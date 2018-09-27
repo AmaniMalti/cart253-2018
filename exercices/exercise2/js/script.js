@@ -165,6 +165,14 @@ function draw() {
     kotkotImageSize = kotkotImageSize + kotkotImageSizeIncrease;
   }
 
+  // if you get 5 dodges you win //
+  if (dodges > 5) {
+  // This means you win//
+  console.log("YOU WIN");
+  dodges = 0;
+
+  }
+
   // Display the current number of successful in the console
   console.log(dodges);
 
