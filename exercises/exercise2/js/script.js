@@ -1,39 +1,39 @@
 /*********************************************************
 
 Exercise 2 - The Artful Dodger
-Pippin Barr
+Amani Malti
 
 Starter code for exercise 2.
 
 *********************************************************/
 
-// The position and size of our avatar circle
+// The position and size of our avatar rectangle
 var avatarX;
 var avatarY;
 var avatarSize = 50;
 
-// The speed and velocity of our avatar circle
+// The speed and velocity of our avatar rectangle
 var avatarSpeed = 10;
 var avatarVX = 0;
 var avatarVY = 0;
 
-// The position and size of the enemy circle
+// The position and size of the enemy rectangle
 var enemyX;
 var enemyY;
 var enemySize = 50;
 
-// How much bigger the enemy circle gets with each successful dodge
+// How much bigger the enemy rectangle gets with each successful dodge
 var enemySizeIncrease = 5;
 // How much bigger the avatar rectangle gets with each successful dodge
 var avatarSizeIncrease = 5;
 
-// The speed and velocity of our enemy circle
+// The speed and velocity of our enemy rectangle
 var enemySpeed = 5;
 var enemyVX = 5;
 
-// How much bigger the enemy circle gets with each successful dodge
+// How much bigger the enemy rectangle gets with each successful dodge
 var enemySpeedIncrease = 0.5;
-// How much bigger the enemy circle gets with each successful dodge
+// How much bigger the enemy rectangle gets with each successful dodge
 var avatarSpeedIncrease = 1;
 
 
@@ -182,12 +182,12 @@ textFont('FUTURA');
 
   // The player is black
   fill(0);
-  // Draw the player as a circle
+  // Draw the player as a rectangle
   rect(avatarX,avatarY,avatarSize,avatarSize);
 
   // The enemy is red
   fill(255,0,0);
-  // Draw the enemy as a circle
+  // Draw the enemy as a rectangle
   rect(enemyX,enemyY,enemySize,enemySize);
 
 }
