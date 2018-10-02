@@ -107,12 +107,22 @@ function setup() {
       image(decoyImage10,x,y);
     }
   }
-
   // Once we've displayed all decoys, we choose a location for the target
   targetX = random(0,width);
   targetY = random(0,height);
-  // And draw it (this means it will always be on top)
-  image(targetImage,targetX,targetY);
+  //Adding while loop to make sure the sausage dog doesn't go underneath the targetImageBgd
+  while ((targetX < ((targetImageBgd.width) * 1.5)) && (targetY < ((targetImageBgd.height) * 1.5))) {
+  // Choose another location
+  targetX = random(0,width);
+  targetY = random(0,height);
+}
+
+  /*  console.log(targetX);
+    console.log(targetX < (targetImageBgd.width) * 1.5);
+    console.log(targetY < (targetImageBgd.height) * 1.5);*/
+
+    // And draw it (this means it will always be on top)
+    image(targetImage,targetX,targetY);
 }
 
 function draw() {
