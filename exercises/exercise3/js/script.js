@@ -16,6 +16,12 @@ var targetY;
 var targetImage;
 var targetImageBgd;
 
+// Velocity and speed target image
+var speed = 2;
+var targetVX = 5;
+var targetVY = 5;
+
+
 // The ten decoy images
 var decoyImage1;
 var decoyImage2;
@@ -127,7 +133,29 @@ function setup() {
 
 function draw() {
   if (gameOver) {
-    // Prepare our typography
+    // Change background color if it's gameover
+    background('rgba(0,255,0, 0.25)');
+
+    // Make the sausage dog run on the x axis
+    targetX += targetVX;
+    // And draw it (this means it will always be on top)
+    image(targetImage,targetX,targetY);
+
+     if (targetX > width + targetImage.width/2) {
+        targetX = - targetImage.width/2
+         }
+
+         // Make the sausage dog run on the Y axis
+         targetY += targetVY;
+         // And draw it (this means it will always be on top)
+         image(targetImage,targetX,targetY);
+
+          if (targetY > height + targetImage.height/2) {
+             targetY = - targetImage.height/2
+           }
+
+
+  /*  // Prepare our typography
     textFont("Helvetica");
     textSize(128);
     textAlign(CENTER,CENTER);
@@ -139,13 +167,12 @@ function draw() {
     noFill();
     stroke(random(255));
     strokeWeight(10);
-    ellipse(targetX,targetY,targetImage.width,targetImage.height);
+    ellipse(targetX,targetY,targetImage.width,targetImage.height);*/
+
   }
-  // displaying black rectangle
 
-//image added
-  image(targetImageBgd,targetImageBgd.width/2,targetImageBgd.height/2,targetImageBgd.width,targetImageBgd.height);
-
+  //image background added
+    image(targetImageBgd,targetImageBgd.width/2,targetImageBgd.height/2,targetImageBgd.width,targetImageBgd.height);
 }
 
 
