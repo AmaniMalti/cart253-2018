@@ -19,7 +19,7 @@ var targetImageBgd;
 // Velocity and speed target image
 var speed = 2;
 var targetVX = 5;
-var targetVY = 5;
+var targetVY = 0;
 
 
 // The ten decoy images
@@ -36,16 +36,23 @@ var decoyImage10;
 
 // The number of decoys to show on the screen, randomly
 // chosen from the decoy images
-var numDecoys = 100;
+// Added more Decoy images from 100 to 500
+var numDecoys = 500;
 
 // Keep track of whether they've won
 var gameOver = false;
+
+// Size of decoy image
+var widthD;
+var heightD;
 
 // preload()
 //
 // Loads the target and decoy images before the program starts
 function preload() {
   targetImage = loadImage("assets/images/animals-target.png");
+
+  // Added the image in the corner
   targetImageBgd = loadImage("assets/images/animals-target-bgd.png");
 
 
@@ -67,8 +74,12 @@ function preload() {
 // of decoys in random positions, then the target
 function setup() {
   createCanvas(windowWidth,windowHeight);
-  background("#ffff00");
+  background('#fae');
   imageMode(CENTER);
+
+  // Reduce size of decoy image
+  var widthD = decoyImage1.width/2;
+  var heightD = decoyImage1.height/2;
 
 
 
@@ -83,35 +94,38 @@ function setup() {
     // images, each with a 10% chance of being shown
     // We'll talk more about this nice quality of random soon enough
     if (r < 0.1) {
-      image(decoyImage1,x,y);
+      image(decoyImage1,x,y,widthD,heightD);
     }
     else if (r < 0.2) {
-      image(decoyImage2,x,y);
+      image(decoyImage2,x,y,widthD,heightD);
     }
     else if (r < 0.3) {
-      image(decoyImage3,x,y);
+      image(decoyImage3,x,y,widthD,heightD);
     }
     else if (r < 0.4) {
-      image(decoyImage4,x,y);
+      image(decoyImage4,x,y,widthD,heightD);
     }
     else if (r < 0.5) {
-      image(decoyImage5,x,y);
+      image(decoyImage5,x,y,widthD,heightD);
     }
     else if (r < 0.6) {
-      image(decoyImage6,x,y);
+      image(decoyImage6,x,y,widthD,heightD);
     }
     else if (r < 0.7) {
-      image(decoyImage7,x,y);
+      image(decoyImage7,x,y,widthD,heightD);
     }
     else if (r < 0.8) {
-      image(decoyImage8,x,y);
+      image(decoyImage8,x,y,widthD,heightD);
     }
     else if (r < 0.9) {
-      image(decoyImage9,x,y);
+      image(decoyImage9,x,y,widthD,heightD);
     }
     else if (r < 1.0) {
-      image(decoyImage10,x,y);
+      image(decoyImage10,x,y,widthD,heightD);
     }
+
+
+
   }
   // Once we've displayed all decoys, we choose a location for the target
   targetX = random(0,width);
@@ -128,13 +142,13 @@ function setup() {
     console.log(targetY < (targetImageBgd.height) * 1.5);*/
 
     // And draw it (this means it will always be on top)
-    image(targetImage,targetX,targetY);
+    image(targetImage,targetX,targetY,targetImage.width/2,targetImage.height/2);
 }
 
 function draw() {
   if (gameOver) {
     // Change background color if it's gameover
-    background('rgba(0,255,0, 0.25)');
+    background('rgba(100%,0%,100%,0.5)');
 
     // Make the sausage dog run on the x axis
     targetX += targetVX;
@@ -148,26 +162,26 @@ function draw() {
          // Make the sausage dog run on the Y axis
          targetY += targetVY;
          // And draw it (this means it will always be on top)
-         image(targetImage,targetX,targetY);
+         image(targetImage,targetX,targetY,targetImage.width*2,targetImage.height*2);
 
           if (targetY > height + targetImage.height/2) {
              targetY = - targetImage.height/2
            }
 
 
-  /*  // Prepare our typography
-    textFont("Helvetica");
+  // Prepare our typography
+    textFont("FUTURA");
     textSize(128);
     textAlign(CENTER,CENTER);
     noStroke();
     fill(random(255));
     // Tell them they won!
-    text("YOU WINNED!",width/2,height/2);
+    text("YOU WON!!!",width/2,height/2);
 
     noFill();
     stroke(random(255));
     strokeWeight(10);
-    ellipse(targetX,targetY,targetImage.width,targetImage.height);*/
+    /*ellipse(targetX,targetY,targetImage.width,targetImage.height);*/
 
   }
 
@@ -184,6 +198,8 @@ function mousePressed() {
   if (mouseX > targetX - targetImage.width/2 && mouseX < targetX + targetImage.width/2) {
     // Check if the mouse is also in the y range of the target
     if (mouseY > targetY - targetImage.height/2 && mouseY < targetY + targetImage.height/2) {
+      var widthD = decoyImage1.width/2;
+      var heightD = decoyImage1.height/2;
       gameOver = true;
 
     }
