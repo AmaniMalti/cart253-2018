@@ -111,7 +111,14 @@ function draw() {
 // Checks arrow keys and adjusts player velocity accordingly
 function handleInput() {
   // Check for horizontal movement
-  if (keyIsDown(LEFT_ARROW)) {
+  // adding control for shift key for horizontal movement
+  if (keyIsDown(SHIFT) && keyIsDown(LEFT_ARROW)) {
+    playerVX = -playerMaxSpeed * 2;
+  }
+  else if (keyIsDown(SHIFT) && keyIsDown(RIGHT_ARROW)) {
+    playerVX = playerMaxSpeed * 2;
+  }
+  else if (keyIsDown(LEFT_ARROW)) {
     playerVX = -playerMaxSpeed;
   }
   else if (keyIsDown(RIGHT_ARROW)) {
@@ -120,9 +127,15 @@ function handleInput() {
   else {
     playerVX = 0;
   }
-
+  // adding control for shift key for vertical movement
+  if (keyIsDown(SHIFT) && keyIsDown(UP_ARROW)) {
+    playerVY = -playerMaxSpeed * 2;
+  }
+  else if (keyIsDown(SHIFT) && keyIsDown(DOWN_ARROW)) {
+    playerVY = playerMaxSpeed * 2;
+  }
   // Check for vertical movement
-  if (keyIsDown(UP_ARROW)) {
+  else if (keyIsDown(UP_ARROW)) {
     playerVY = -playerMaxSpeed;
   }
   else if (keyIsDown(DOWN_ARROW)) {
