@@ -13,6 +13,7 @@ sprinting, random movement, screen wrap.
 // Track whether the game is over
 var gameOver = false;
 
+
 // Player position, size, velocity
 var playerX;
 var playerY;
@@ -44,7 +45,17 @@ var eatHealth = 10;
 // Number of prey eaten during the game
 var preyEaten = 0;
 
-// create parameter variable for noise function
+// Create a obstacle for player
+var obstacleX;
+var obstacleY;
+var obstacleRadius = 15;
+var obstacleVX = 0;
+var obstacleVY = 0;
+var obstacleMaxSpeed = 5;
+// Obstacle fill color
+var obstacleFill = 30;
+
+// Create parameter variable for noise function
 var t = 0.01;
 
 // setup()
@@ -57,6 +68,7 @@ function setup() {
 
   setupPrey();
   setupPlayer();
+  setupObstacle();
 }
 
 // setupPrey()
@@ -79,6 +91,16 @@ function setupPlayer() {
   playerHealth = playerMaxHealth;
 }
 
+// setupObstacle()
+//
+// Initialises obstacle's position and velocity
+function setupObstacle() {
+  obstacleX = width/5;
+  obstacleY = height/2;
+  obstacleVX = -obstacleMaxSpeed;
+  obstacleVY = obstacleMaxSpeed;
+}
+
 // draw()
 //
 // While the game is active, checks input
@@ -94,12 +116,15 @@ function draw() {
 
     movePlayer();
     movePrey();
+    moveObstacle();
 
     updateHealth();
     checkEating();
+    checkHunted();
 
     drawPrey();
     drawPlayer();
+    drawObstacle();
   }
   else {
     showGameOver();
@@ -189,43 +214,6 @@ function updateHealth() {
   }
 }
 
-// checkEating()
-//
-// Check if the player overlaps the prey and updates health of both
-function checkEating() {
-  // Get distance of player to prey
-  var d = dist(playerX,playerY,preyX,preyY);
-  // Check if it's an overlap
-  if (d < playerRadius + preyRadius) {
-    // Increase the player health
-    playerHealth = constrain(playerHealth + eatHealth,0,playerMaxHealth);
-    // Increase player size
-    if (playerRadius < 40) {
-      playerRadius += 0.1;
-      }
-    //  console.log (playerRadius);
-    // Reduce the prey health
-    preyHealth = constrain(preyHealth - eatHealth,0,preyMaxHealth);
-    // Decrease prey size
-    if (preyRadius > 10) {
-        preyRadius -= 0.1;
-        }
-    //  console.log (preyRadius);
-
-
-    // Check if the prey died
-    if (preyHealth === 0) {
-      // Move the "new" prey to a random position
-      preyX = random(0,width);
-      preyY = random(0,height);
-      // Give it full health
-      preyHealth = preyMaxHealth;
-      // Track how many prey were eaten
-      preyEaten++;
-    }
-  }
-}
-
 // movePrey()
 //
 // Moves the prey based on random velocity changes
@@ -265,12 +253,105 @@ function movePrey() {
   }
 }
 
+// moveObstacle()
+//
+// Moves the obstacle randomly
+function moveObstacle() {
+
+    // replace random by noise function
+    obstacleVX = map(noise(1.5*t),0,1,-obstacleMaxSpeed,obstacleMaxSpeed);
+    obstacleVY = map(noise(1.5*t),0,2,-obstacleMaxSpeed,obstacleMaxSpeed);
+    t += 0.01;
+
+
+  // Update obstacle position based on velocity
+  obstacleX = obstacleVX + obstacleX + 2;
+  obstacleY = obstacleVY + obstacleY + 2;
+
+  // Screen wrapping
+  if (obstacleX < 0) {
+    obstacleX += width;
+  }
+  else if (obstacleX > width) {
+    obstacleX -= width;
+  }
+
+  if (obstacleY < 0) {
+    obstacleY += height;
+  }
+  else if (obstacleY > height) {
+    obstacleY -= height;
+  }
+}
+
+// checkEating()
+//
+// Check if the player overlaps the prey and updates health of both
+function checkEating() {
+  // Get distance of player to prey
+  var d = dist(playerX,playerY,preyX,preyY);
+  // Check if it's an overlap
+  if (d < playerRadius + preyRadius) {
+    // Increase the player health
+    playerHealth = constrain(playerHealth + eatHealth,0,playerMaxHealth);
+    // Increase player size
+    if (playerRadius < 40) {
+      playerRadius += 0.1;
+      }
+    //  console.log (playerRadius);
+    // Reduce the prey health
+    preyHealth = constrain(preyHealth - eatHealth,0,preyMaxHealth);
+    // Decrease prey size
+    if (preyRadius > 10) {
+        preyRadius -= 0.1;
+        }
+    //  console.log (preyRadius);
+    // Increse prey speed with noise
+    t += 0.2;
+    console.log (preyVX);
+    console.log (preyVY);
+
+
+
+    // Check if the prey died
+    if (preyHealth === 0) {
+      // Move the "new" prey to a random position
+      preyX = random(0,width);
+      preyY = random(0,height);
+      // Give it full health
+      preyHealth = preyMaxHealth;
+      // Track how many prey were eaten
+      preyEaten++;
+    }
+  }
+}
+
+// checkHunted()
+//
+// Check if the player overlaps the obstacle, it's game over
+function checkHunted() {
+  // Get distance of player to obstacle
+  var d = dist(playerX,playerY,obstacleX,obstacleY);
+  // Check if it's an overlap
+  if (d < playerRadius + obstacleRadius) {
+    gameOver = true;
+  }
+}
+
 // drawPrey()
 //
 // Draw the prey as an ellipse with alpha based on health
 function drawPrey() {
   fill(preyFill,preyHealth);
   ellipse(preyX,preyY,preyRadius*2);
+}
+
+// drawPrey()
+//
+// Draw the prey as an ellipse with alpha based on health
+function drawObstacle() {
+  fill(obstacleFill,225);
+  ellipse(obstacleX,obstacleY,obstacleRadius*2);
 }
 
 // drawPlayer()
