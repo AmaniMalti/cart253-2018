@@ -114,9 +114,11 @@ function handleInput() {
   // adding control for shift key for horizontal movement
   if (keyIsDown(SHIFT) && keyIsDown(LEFT_ARROW)) {
     playerVX = -playerMaxSpeed * 2;
+    playerHealth = playerHealth - 0.5;
   }
   else if (keyIsDown(SHIFT) && keyIsDown(RIGHT_ARROW)) {
     playerVX = playerMaxSpeed * 2;
+    playerHealth = playerHealth - 0.5;
   }
   else if (keyIsDown(LEFT_ARROW)) {
     playerVX = -playerMaxSpeed;
@@ -127,14 +129,16 @@ function handleInput() {
   else {
     playerVX = 0;
   }
-  // adding control for shift key for vertical movement
+  // adding shift key for vertical movement for ability to sprint
   if (keyIsDown(SHIFT) && keyIsDown(UP_ARROW)) {
     playerVY = -playerMaxSpeed * 2;
+    playerHealth = playerHealth - 0.5;
   }
   else if (keyIsDown(SHIFT) && keyIsDown(DOWN_ARROW)) {
     playerVY = playerMaxSpeed * 2;
+    playerHealth = playerHealth - 0.5;
   }
-  // Check for vertical movement
+  // vertical movement resets to original speed
   else if (keyIsDown(UP_ARROW)) {
     playerVY = -playerMaxSpeed;
   }
@@ -195,8 +199,23 @@ function checkEating() {
   if (d < playerRadius + preyRadius) {
     // Increase the player health
     playerHealth = constrain(playerHealth + eatHealth,0,playerMaxHealth);
+    // Increase player size
+    if (playerRadius < 40) {
+      playerRadius += 0.1;
+      }
+    //  console.log (playerRadius);
     // Reduce the prey health
     preyHealth = constrain(preyHealth - eatHealth,0,preyMaxHealth);
+    // Decrease prey size
+    if (preyRadius > 10) {
+        preyRadius -= 0.1;
+        }
+    //  console.log (preyRadius);
+
+    // Increse prey speed with noise??
+    t += 0.2;
+    console.log (preyVX);
+    console.log (preyVY);
 
     // Check if the prey died
     if (preyHealth === 0) {
