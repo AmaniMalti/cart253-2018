@@ -212,10 +212,6 @@ function checkEating() {
         }
     //  console.log (preyRadius);
 
-    // Increse prey speed with noise??
-    t += 0.2;
-    console.log (preyVX);
-    console.log (preyVY);
 
     // Check if the prey died
     if (preyHealth === 0) {
