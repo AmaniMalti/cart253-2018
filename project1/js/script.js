@@ -38,7 +38,7 @@ var preyMaxSpeed = 4;
 var preyHealth;
 var preyMaxHealth = 100;
 // Prey fill color
-var preyFill = 200;
+//var preyFill = 20;
 
 // Amount of health obtained per frame of "eating" the prey
 var eatHealth = 10;
@@ -52,11 +52,18 @@ var obstacleRadius = 15;
 var obstacleVX = 0;
 var obstacleVY = 0;
 var obstacleMaxSpeed = 5;
-// Obstacle fill color
-var obstacleFill = 30;
+
+// Adding sounds
+var coinsSound;
+var gameoverSound;
 
 // Create parameter variable for noise function
 var t = 0.01;
+
+function preload() {
+  coinsSound = new Audio("assets/sounds/coins.wav");
+  gameoverSound = new Audio("assets/sounds/gameover.wav");
+}
 
 // setup()
 //
@@ -109,7 +116,8 @@ function setupObstacle() {
 // displays the two agents.
 // When the game is over, shows the game over screen.
 function draw() {
-  background(100,100,200);
+  background('#b3d4fc');
+
 
   if (!gameOver) {
     handleInput();
@@ -211,6 +219,8 @@ function updateHealth() {
   if (playerHealth === 0) {
     // If so, the game is over
     gameOver = true;
+    // Play sound
+    gameoverSound.play();
   }
 }
 
@@ -292,6 +302,8 @@ function checkEating() {
   var d = dist(playerX,playerY,preyX,preyY);
   // Check if it's an overlap
   if (d < playerRadius + preyRadius) {
+    // Play sound
+    coinsSound.play();
     // Increase the player health
     playerHealth = constrain(playerHealth + eatHealth,0,playerMaxHealth);
     // Increase player size
@@ -335,6 +347,8 @@ function checkHunted() {
   // Check if it's an overlap
   if (d < playerRadius + obstacleRadius) {
     gameOver = true;
+    // Play sound
+    gameoverSound.play();
   }
 }
 
@@ -342,15 +356,17 @@ function checkHunted() {
 //
 // Draw the prey as an ellipse with alpha based on health
 function drawPrey() {
-  fill(preyFill,preyHealth);
+  //fill(preyFill,preyHealth);
+  fill(255,204,0,preyHealth);
   ellipse(preyX,preyY,preyRadius*2);
+
 }
 
-// drawPrey()
+// drawObstacle()
 //
-// Draw the prey as an ellipse with alpha based on health
+// Draw the obstacle as an ellipse and add color
 function drawObstacle() {
-  fill(obstacleFill,225);
+  fill('rgba(100%,0%,100%,0.5)');
   ellipse(obstacleX,obstacleY,obstacleRadius*2);
 }
 
@@ -368,7 +384,8 @@ function drawPlayer() {
 function showGameOver() {
   textSize(32);
   textAlign(CENTER,CENTER);
-  fill(0);
+  text('Futura');
+  fill(255);
   var gameOverText = "GAME OVER\n";
   gameOverText += "You ate " + preyEaten + " prey\n";
   gameOverText += "before you died."
