@@ -23,7 +23,7 @@ var playerVY = 0;
 var playerMaxSpeed = 2;
 // Player health
 var playerHealth;
-var playerMaxHealth = 255;
+var playerMaxHealth = 350;
 // Player fill color
 var playerFill = 50;
 
