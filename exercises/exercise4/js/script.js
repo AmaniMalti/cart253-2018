@@ -151,15 +151,15 @@ function draw() {
   // Display the paddles and ball
   ///////// NEW /////////
   // Added new functions to control the alpha color of the paddles depending on the score
-  fillLeftPaddle();
+  fillPaddle(leftPaddle);
   displayPaddle(leftPaddle);
-  fillRightPaddle();
+  fillPaddle(rightPaddle);
   displayPaddle(rightPaddle);
   fill(255);
   displayBall();
   ///////// END NEW /////////
 
-  ///////// NEW /////////
+  ///////// NEW EX 1 /////////
   // Added text to show the score of Player A
 /*  text('Player B   '+rightPaddle.score,530,50);
   textAlign(CENTER);
@@ -172,7 +172,7 @@ function draw() {
   textSize(20);
   textStyle(BOLD);
   textFont('FUTURA');
-  ///////// END NEW /////////
+  ///////// END NEW EX 1/////////
 */
 }
 
@@ -287,7 +287,7 @@ function handleBallOffScreen() {
   var ballLeft = ball.x - ball.size/2;
   var ballRight = ball.x + ball.size/2;
 
-  // Check for ball going off the sides
+/*  // Check for ball going off the sides
   if (ballRight < 0 || ballLeft > width) {
     // If it went off either side, reset it to the centre
     ball.x = width/2;
@@ -297,15 +297,33 @@ function handleBallOffScreen() {
     // position is reset.
     // This is where we would count points etc!
   }
+*/
   ///////// NEW /////////
-  // Controlling Player A score  and Player B score with transparency property of the paddles
 
   if (ballRight < 0) {
+    ball.x = width/2;
+    ball.y = height/2;
+    ball.vx = ball.speed;
+    ball.vy= ball.speed * random (-1,1);
+ }
+
+ if (ballLeft > width) {
+   ball.x = width/2;
+   ball.y = height/2;
+   ball.vx = -ball.speed;
+   ball.vy= ball.speed * random (-1,1);
+ }
+
+  // Controlling Player A score  and Player B score with transparency property of the paddles
+
+ if (ballRight < 0) {
     leftPaddle.alpha -= 25;
+
 }
   if (ballLeft > width) {
     rightPaddle.alpha -= 25;
   }
+
   ///////// END NEW /////////
 }
 
@@ -323,12 +341,13 @@ function displayPaddle(paddle) {
   rect(paddle.x,paddle.y,paddle.w,paddle.h);
 }
 ///////// NEW /////////
-// New function to set the alpha color of the left paddle
-function fillLeftPaddle() {
-fill(255,leftPaddle.alpha);
-}
-// New function to set the alpha color of the right paddle
-function fillRightPaddle() {
-fill(255,rightPaddle.alpha);
+// New function to set the alpha color of the left paddle or the right paddle
+function fillPaddle(paddle) {
+  if (paddle == leftPaddle){
+    fill(255,leftPaddle.alpha);
+  }
+  else if(paddle == rightPaddle){
+    fill(255,rightPaddle.alpha);
+  }
 }
 ///////// END NEW /////////
