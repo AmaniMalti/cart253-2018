@@ -44,6 +44,7 @@ var leftPaddle = {
   speed: 5,
   ///////// NEW /////////
   score: 0,
+  alpha: 255,
   ///////// END NEW /////////
   upKeyCode: 87, // The key code for W
   downKeyCode: 83 // The key code for S
@@ -63,6 +64,7 @@ var rightPaddle = {
   speed: 5,
   ///////// NEW /////////
   score: 0,
+  alpha: 255,
   ///////// END NEW /////////
   upKeyCode: 38, // The key code for the UP ARROW
   downKeyCode: 40 // The key code for the DOWN ARROW
@@ -147,13 +149,19 @@ function draw() {
   handleBallOffScreen();
 
   // Display the paddles and ball
+  ///////// NEW /////////
+  // Added new functions to control the alpha color of the paddles depending on the score
+  fillLeftPaddle();
   displayPaddle(leftPaddle);
+  fillRightPaddle();
   displayPaddle(rightPaddle);
+  fill(255);
   displayBall();
+  ///////// END NEW /////////
 
   ///////// NEW /////////
   // Added text to show the score of Player A
-  text('Player B   '+rightPaddle.score,530,50);
+/*  text('Player B   '+rightPaddle.score,530,50);
   textAlign(CENTER);
   textSize(20);
   textStyle(BOLD);
@@ -165,7 +173,7 @@ function draw() {
   textStyle(BOLD);
   textFont('FUTURA');
   ///////// END NEW /////////
-
+*/
 }
 
 
@@ -290,12 +298,13 @@ function handleBallOffScreen() {
     // This is where we would count points etc!
   }
   ///////// NEW /////////
-  // Controlling the score Player A Player B
+  // Controlling Player A score  and Player B score with transparency property of the paddles
+
   if (ballRight < 0) {
-    rightPaddle.score += 1;
+    leftPaddle.alpha -= 25;
 }
   if (ballLeft > width) {
-    leftPaddle.score += 1;
+    rightPaddle.alpha -= 25;
   }
   ///////// END NEW /////////
 }
@@ -313,3 +322,13 @@ function displayBall() {
 function displayPaddle(paddle) {
   rect(paddle.x,paddle.y,paddle.w,paddle.h);
 }
+///////// NEW /////////
+// New function to set the alpha color of the left paddle
+function fillLeftPaddle() {
+fill(255,leftPaddle.alpha);
+}
+// New function to set the alpha color of the right paddle
+function fillRightPaddle() {
+fill(255,rightPaddle.alpha);
+}
+///////// END NEW /////////
