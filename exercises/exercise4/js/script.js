@@ -298,21 +298,17 @@ function handleBallOffScreen() {
     // This is where we would count points etc!
   }
 */
+  // Add call to reset function
   ///////// NEW /////////
 
   if (ballRight < 0) {
-    ball.x = width/2;
-    ball.y = height/2;
-    ball.vx = ball.speed;
-    ball.vy= ball.speed * random (-1,1);
- }
-
- if (ballLeft > width) {
-   ball.x = width/2;
-   ball.y = height/2;
-   ball.vx = -ball.speed;
-   ball.vy= ball.speed * random (-1,1);
- }
+    //reset 0 means reset to the right direction
+    reset(0);
+  }
+  if (ballLeft > width){
+    //reset 1 means reset to the left direction
+    reset(1);
+  }
 
   // Controlling Player A score  and Player B score with transparency property of the paddles
 
@@ -351,3 +347,21 @@ function fillPaddle(paddle) {
   }
 }
 ///////// END NEW /////////
+
+    ///////// NEW /////////
+    // Creating reset function using a direction parameter
+    function reset(direction){
+      if (direction == 1){
+      ball.x = width/2;
+      ball.y = height/2;
+      ball.vx = ball.speed;
+      ball.vy = random (-10,10);
+    }
+  else if (direction == 0){
+     ball.x = width/2;
+     ball.y = height/2;
+     ball.vx = -ball.speed;
+     ball.vy = random (-10,10);
+   }
+  }
+  ///////// END NEW /////////
