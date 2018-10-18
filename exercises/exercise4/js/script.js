@@ -4,9 +4,13 @@
 // A primitive implementation of Pong with no scoring system
 // just the ability to play the game with the keyboard.
 
+///////// NEW /////////
+///////// END NEW /////////
+
 // Game colors
 var bgColor = 0;
 var fgColor = 255;
+
 
 // BALL
 
@@ -38,6 +42,9 @@ var leftPaddle = {
   vx: 0,
   vy: 0,
   speed: 5,
+  ///////// NEW /////////
+  score: 0,
+  ///////// END NEW /////////
   upKeyCode: 87, // The key code for W
   downKeyCode: 83 // The key code for S
 }
@@ -54,6 +61,9 @@ var rightPaddle = {
   vx: 0,
   vy: 0,
   speed: 5,
+  ///////// NEW /////////
+  score: 0,
+  ///////// END NEW /////////
   upKeyCode: 38, // The key code for the UP ARROW
   downKeyCode: 40 // The key code for the DOWN ARROW
 }
@@ -111,6 +121,7 @@ function setupBall() {
 //
 // Calls the appropriate functions to run the game
 function draw() {
+
   // Fill the background
   background(bgColor);
 
@@ -139,6 +150,22 @@ function draw() {
   displayPaddle(leftPaddle);
   displayPaddle(rightPaddle);
   displayBall();
+
+  ///////// NEW /////////
+  // Added text to show the score of Player A
+  text('Player B   '+rightPaddle.score,530,50);
+  textAlign(CENTER);
+  textSize(20);
+  textStyle(BOLD);
+  textFont('FUTURA');
+  // Added text to show the score of Player B
+  text('Player A   '+leftPaddle.score,100,50);
+  textAlign(CENTER);
+  textSize(20);
+  textStyle(BOLD);
+  textFont('FUTURA');
+  ///////// END NEW /////////
+
 }
 
 
@@ -262,6 +289,15 @@ function handleBallOffScreen() {
     // position is reset.
     // This is where we would count points etc!
   }
+  ///////// NEW /////////
+  // Controlling the score Player A Player B
+  if (ballRight < 0) {
+    rightPaddle.score += 1;
+}
+  if (ballLeft > width) {
+    leftPaddle.score += 1;
+  }
+  ///////// END NEW /////////
 }
 
 // displayBall()
