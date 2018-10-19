@@ -8,8 +8,13 @@
 ///////// END NEW /////////
 
 // Game colors
-var bgColor = 0;
+var bgColor = '#6A9981';
 var fgColor = 255;
+
+///////// NEW /////////
+//Creating variable to stop the game
+var gameOver = false;
+///////// END NEW /////////
 
 
 // BALL
@@ -37,7 +42,7 @@ var paddleInset = 50;
 var leftPaddle = {
   x: 0,
   y: 0,
-  w: 20,
+  w: 10,
   h: 70,
   vx: 0,
   vy: 0,
@@ -57,7 +62,7 @@ var leftPaddle = {
 var rightPaddle = {
   x: 0,
   y: 0,
-  w: 20,
+  w: 10,
   h: 70,
   vx: 0,
   vy: 0,
@@ -73,11 +78,21 @@ var rightPaddle = {
 // A variable to hold the beep sound we will play on bouncing
 var beepSFX;
 
+///////// NEW /////////
+var gameOverSound;
+///////// END NEW /////////
+
+
 // preload()
 //
 // Loads the beep audio for the sound of bouncing
 function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
+
+  ///////// NEW /////////
+  gameOverSound = new Audio("assets/sounds/gameover.wav");
+  ///////// END NEW /////////
+
 }
 
 // setup()
@@ -157,23 +172,17 @@ function draw() {
   displayPaddle(rightPaddle);
   fill(255);
   displayBall();
+
+  // Stopping the game and playing sound when game over is true
+  if ((rightPaddle.score == 10) || (leftPaddle.score == 10)){
+    gameOver = true;
+    displayScore ();
+    ball.vx = 0;
+    ball.vy = 0;
+    gameOverSound.play();
+  }
   ///////// END NEW /////////
 
-  ///////// NEW EX 1 /////////
-  // Added text to show the score of Player A
-/*  text('Player B   '+rightPaddle.score,530,50);
-  textAlign(CENTER);
-  textSize(20);
-  textStyle(BOLD);
-  textFont('FUTURA');
-  // Added text to show the score of Player B
-  text('Player A   '+leftPaddle.score,100,50);
-  textAlign(CENTER);
-  textSize(20);
-  textStyle(BOLD);
-  textFont('FUTURA');
-  ///////// END NEW EX 1/////////
-*/
 }
 
 
@@ -302,10 +311,14 @@ function handleBallOffScreen() {
   ///////// NEW /////////
 
   if (ballRight < 0) {
+    // Tracking score for right paddle
+    rightPaddle.score += 1;
     //reset 0 means reset to the right direction
     reset(0);
   }
   if (ballLeft > width){
+    // Tracking score for left paddle
+    leftPaddle.score += 1;
     //reset 1 means reset to the left direction
     reset(1);
   }
@@ -327,7 +340,7 @@ function handleBallOffScreen() {
 //
 // Draws ball on screen based on its properties
 function displayBall() {
-  rect(ball.x,ball.y,ball.size,ball.size);
+  ellipse(ball.x,ball.y,ball.size,ball.size);
 }
 
 // displayPaddle(paddle)
@@ -365,3 +378,20 @@ function fillPaddle(paddle) {
    }
   }
   ///////// END NEW /////////
+
+  ///////// NEW EX  /////////
+  function displayScore() {
+  // Added text to show the score of Player A
+  text('Player B   '+rightPaddle.score,530,50);
+  textAlign(CENTER);
+  textSize(20);
+  textStyle(BOLD);
+  textFont('FUTURA');
+  // Added text to show the score of Player B
+  text('Player A   '+leftPaddle.score,100,50);
+  textAlign(CENTER);
+  textSize(20);
+  textStyle(BOLD);
+  textFont('FUTURA');
+ }
+ ///////// END NEW EX /////////
