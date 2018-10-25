@@ -367,13 +367,13 @@ function fillPaddle(paddle) {
       if (direction == 1){
       ball.x = width/2;
       ball.y = height/2;
-      ball.vx = ball.speed;
+      ball.vx = -ball.speed;
       ball.vy = random (-10,10);
     }
   else if (direction == 0){
      ball.x = width/2;
      ball.y = height/2;
-     ball.vx = -ball.speed;
+     ball.vx = ball.speed;
      ball.vy = random (-10,10);
    }
   }
