@@ -12,7 +12,7 @@ function Ball(x,y,vx,vy,size,speed) {
   this.y = y;
   this.vx = vx;
   this.vy = vy;
-  this.size = size;
+  this.size = 20;
   this.speed = speed;
 }
 
@@ -62,8 +62,11 @@ Ball.prototype.isOffScreen = function () {
 // Draw the ball as a circle on the screen
 Ball.prototype.display = function () {
   fill(255);
+  ///////// NEW /////////
+  // Made the the ball to a circle and added no stroe
   ellipse(this.x,this.y,this.size,this.size);
   noStroke();
+  ///////// END NEW /////////
 
 }
 

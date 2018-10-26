@@ -24,10 +24,10 @@ function setup() {
   // Create the right paddle with UP and DOWN as controls
   ///////// NEW /////////
   // Created the paddle with score zero initially
-  rightPaddle = new Paddle(width-0,height/2,10,60,10,DOWN_ARROW,UP_ARROW,0,480);
+  rightPaddle = new Paddle(width-20,height/2,10,60,10,DOWN_ARROW,UP_ARROW,0,480);
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
-  leftPaddle = new Paddle(20,height/2,10,60,10,83,87,0,50);
+  leftPaddle = new Paddle(10,height/2,10,60,10,83,87,0,50);
   ///////// END NEW /////////
 }
 
@@ -38,7 +38,7 @@ function setup() {
 function draw() {
   ///////// NEW /////////
   // changed the background color
-  background('#fae');
+  background('#6A9981');
   // Here the ball went off to the left side
   if ((ball.isOffScreen()===1)) {
     ball.reset();
