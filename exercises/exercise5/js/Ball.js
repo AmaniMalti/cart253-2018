@@ -45,9 +45,13 @@ Ball.prototype.isOffScreen = function () {
  // Check for which side the ball went off screen
 
   if (this.x + this.size < 0 ) {
+    // Incrementing score
+    rightPaddle.score += 1;
     return 1;
   }
   else if (this.x > width){
+    // Incrementing score
+    leftPaddle.score += 1;
     return 2;
   }
   else {

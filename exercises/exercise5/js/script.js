@@ -22,10 +22,13 @@ function setup() {
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,10,5);
   // Create the right paddle with UP and DOWN as controls
-  rightPaddle = new Paddle(width-10,height/2,10,60,10,DOWN_ARROW,UP_ARROW);
+  ///////// NEW /////////
+  // Created the paddle with score zero initially
+  rightPaddle = new Paddle(width-10,height/2,10,60,10,DOWN_ARROW,UP_ARROW,0);
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
-  leftPaddle = new Paddle(0,height/2,10,60,10,83,87);
+  leftPaddle = new Paddle(0,height/2,10,60,10,83,87,0);
+  ///////// END NEW /////////
 }
 
 // draw()
@@ -41,6 +44,7 @@ function draw() {
   ball.update();
   leftPaddle.update();
   rightPaddle.update();
+
   ///////// NEW /////////
   // Here the ball went off to the left side
   if ((ball.isOffScreen()==1)) {
@@ -61,7 +65,27 @@ function draw() {
   ball.display();
   leftPaddle.display();
   rightPaddle.display();
+  ///////// NEW /////////
+  // Calling function that displays the score
+  displayScore();
+  ///////// NEW /////////
 }
+///////// NEW  /////////
+  function displayScore() {
+  // Added text to show the score of Player A
+  text('Player B   '+rightPaddle.score,530,50);
+  textAlign(CENTER);
+  textSize(20);
+  textStyle(BOLD);
+  textFont('FUTURA');
+  // Added text to show the score of Player B
+  text('Player A   '+leftPaddle.score,100,50);
+  textAlign(CENTER);
+  textSize(20);
+  textStyle(BOLD);
+  textFont('FUTURA');
+ }
+ ///////// END NEW /////////
 
 ///////// NEW /////////
 
