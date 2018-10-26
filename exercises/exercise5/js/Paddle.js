@@ -6,7 +6,7 @@
 // Paddle constructor
 //
 // Sets the properties with the provided arguments or defaults
-function Paddle(x,y,w,h,speed,downKey,upKey,score) {
+function Paddle(x,y,w,h,speed,downKey,upKey,score,displayX) {
   this.x = x;
   this.y = y;
   this.vx = 0;
@@ -19,6 +19,8 @@ function Paddle(x,y,w,h,speed,downKey,upKey,score) {
   ///////// NEW /////////
   // Adding score proprety
   this.score = score;
+  // Position of the padel display
+  this.displayX = displayX;
   ///////// END NEW /////////
 }
 
@@ -53,3 +55,13 @@ Paddle.prototype.display = function() {
   fill(255);
   rect(this.x,this.y,this.w,this.h);
 }
+///////// NEW  /////////
+  Paddle.prototype.displayScore = function() {
+  // Added text to show the score of Player
+  text(this.score,this.displayX,50);
+  textAlign(CENTER);
+  textSize(20);
+  textStyle(BOLD);
+  textFont('FUTURA');
+}
+ ///////// END NEW /////////

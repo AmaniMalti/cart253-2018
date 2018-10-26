@@ -24,10 +24,10 @@ function setup() {
   // Create the right paddle with UP and DOWN as controls
   ///////// NEW /////////
   // Created the paddle with score zero initially
-  rightPaddle = new Paddle(width-10,height/2,10,60,10,DOWN_ARROW,UP_ARROW,0);
+  rightPaddle = new Paddle(width-0,height/2,10,60,10,DOWN_ARROW,UP_ARROW,0,480);
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
-  leftPaddle = new Paddle(0,height/2,10,60,10,83,87,0);
+  leftPaddle = new Paddle(20,height/2,10,60,10,83,87,0,50);
   ///////// END NEW /////////
 }
 
@@ -36,7 +36,26 @@ function setup() {
 // Handles input, updates all the elements, checks for collisions
 // and displays everything.
 function draw() {
-  background(0);
+  ///////// NEW /////////
+  // changed the background color
+  background('#fae');
+  // Here the ball went off to the left side
+  if ((ball.isOffScreen()===1)) {
+    ball.reset();
+    ball.vx = ball.speed;
+    ball.vy = random (-10,10);
+    // Incrementing score
+    rightPaddle.score += 1;
+  }
+  // Here the ball went off to the right side
+  if ((ball.isOffScreen()===2)) {
+    ball.reset();
+    ball.vx = -ball.speed;
+    ball.vy = random (-10,10);
+    // Incrementing score
+    leftPaddle.score += 1;
+  }
+  ///////// END NEW /////////
 
   leftPaddle.handleInput();
   rightPaddle.handleInput();
@@ -45,48 +64,16 @@ function draw() {
   leftPaddle.update();
   rightPaddle.update();
 
-  ///////// NEW /////////
-  // Here the ball went off to the left side
-  if ((ball.isOffScreen()==1)) {
-    ball.reset();
-    ball.vx = ball.speed;
-    ball.vy = random (-10,10);
-  }
-  // Here the ball went off to the right side
-  if ((ball.isOffScreen()==2)) {
-    ball.reset();
-    ball.vx = -ball.speed;
-    ball.vy = random (-10,10);
-  }
-  ///////// END NEW /////////
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
 
   ball.display();
   leftPaddle.display();
   rightPaddle.display();
+
   ///////// NEW /////////
   // Calling function that displays the score
-  displayScore();
+    rightPaddle.displayScore();
+    leftPaddle.displayScore();
   ///////// NEW /////////
 }
-///////// NEW  /////////
-  function displayScore() {
-  // Added text to show the score of Player A
-  text('Player B   '+rightPaddle.score,530,50);
-  textAlign(CENTER);
-  textSize(20);
-  textStyle(BOLD);
-  textFont('FUTURA');
-  // Added text to show the score of Player B
-  text('Player A   '+leftPaddle.score,100,50);
-  textAlign(CENTER);
-  textSize(20);
-  textStyle(BOLD);
-  textFont('FUTURA');
- }
- ///////// END NEW /////////
-
-///////// NEW /////////
-
-///////// END NEW /////////

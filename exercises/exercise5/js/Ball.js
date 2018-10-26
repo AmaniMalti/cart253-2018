@@ -44,28 +44,27 @@ Ball.prototype.isOffScreen = function () {
  ///////// NEW /////////
  // Check for which side the ball went off screen
 
-  if (this.x + this.size < 0 ) {
-    // Incrementing score
-    rightPaddle.score += 1;
-    return 1;
-  }
-  else if (this.x > width){
-    // Incrementing score
-    leftPaddle.score += 1;
-    return 2;
+  if (this.x - this.size > width){
+   // Incrementing score
+   return (2);
+ }
+  else if (this.x + this.size < 0 ) {
+    return (1);
   }
   else {
-    return 0;
+    return (0);
   }
 }
 ///////// END NEW /////////
 
 // display()
 //
-// Draw the ball as a rectangle on the screen
+// Draw the ball as a circle on the screen
 Ball.prototype.display = function () {
   fill(255);
-  rect(this.x,this.y,this.size,this.size);
+  ellipse(this.x,this.y,this.size,this.size);
+  noStroke();
+
 }
 
 // handleCollision(paddle)
