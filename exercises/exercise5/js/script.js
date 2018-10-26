@@ -41,11 +41,20 @@ function draw() {
   ball.update();
   leftPaddle.update();
   rightPaddle.update();
-
-  if (ball.isOffScreen()) {
+  ///////// NEW /////////
+  // Here the ball went off to the left side
+  if ((ball.isOffScreen()==1)) {
     ball.reset();
+    ball.vx = ball.speed;
+    ball.vy = random (-10,10);
   }
-
+  // Here the ball went off to the right side
+  if ((ball.isOffScreen()==2)) {
+    ball.reset();
+    ball.vx = -ball.speed;
+    ball.vy = random (-10,10);
+  }
+  ///////// END NEW /////////
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
 
@@ -53,3 +62,7 @@ function draw() {
   leftPaddle.display();
   rightPaddle.display();
 }
+
+///////// NEW /////////
+
+///////// END NEW /////////
