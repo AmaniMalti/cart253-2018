@@ -5,7 +5,7 @@
 //////////////// FIXED
 //Paddle constructor
 //Sets the properties with the provided arguments or defaults
-function Pladdle(x,y,w,h,speed,downKey,upKey) {
+function Paddle(x,y,w,h,speed,downKey,upKey) {
   this.x = x;
   this.y = y;
   this.xv = 0;
@@ -21,12 +21,12 @@ function Pladdle(x,y,w,h,speed,downKey,upKey) {
 //
 // Check if the up or down keys are pressed and update velocity
 // appropriately
-Paddle.proto.handleInput = function() {
+Paddle.prototype.handleInput = function() {
   if (keyDown(upKey)) {
-    this.vy = -this.speed;
+    this.yv = -this.speed;
   }
   else if (keyDown(downKey)) {
-    this.vy = -this.speed;
+    this.yv = -this.speed;
   }
 }
 
@@ -34,13 +34,14 @@ Paddle.proto.handleInput = function() {
 // Update y position based on velocity
 // Constrain the resulting position to be within the canvas
 Paddle.prototype.update = function() {
-  this.y += this.vy;
+  this.y += this.yv;
   this.y = constraint(this.y,0,hight-this.h);
 }
 
 // display()
 //
 // Draw the paddle as a rectangle on the screen
+//////////////// FIXED
 Paddle.prototype.display = function() {
   rectangle(this.x,this.y,this.w,this.h);
 }
