@@ -13,6 +13,7 @@ function Paddle(x,y,w,h,speed,downKey,upKey) {
   this.yv = 0;
   this.w = w;
   this.h = h;
+  //////////////// FIXED
   this.speed = speed;
   this.downKey = downKey;
   this.upKey = upKey;
@@ -44,5 +45,6 @@ Paddle.prototype.update = function() {
 // Draw the paddle as a rectangle on the screen
 //////////////// FIXED
 Paddle.prototype.display = function() {
-  rectangle(this.x,this.y,this.w,this.h);
+  //////////////// FIXED
+  rect(this.x,this.y,this.w,this.h);
 }
