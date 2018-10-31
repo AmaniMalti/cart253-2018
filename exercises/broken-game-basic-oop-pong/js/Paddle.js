@@ -5,6 +5,7 @@
 //////////////// FIXED
 //Paddle constructor
 //Sets the properties with the provided arguments or defaults
+//////////////// FIXED
 function Paddle(x,y,w,h,speed,downKey,upKey) {
   this.x = x;
   this.y = y;
@@ -12,7 +13,7 @@ function Paddle(x,y,w,h,speed,downKey,upKey) {
   this.yv = 0;
   this.w = w;
   this.h = h;
-  this.speed = speeed;
+  this.speed = speed;
   this.downKey = downKey;
   this.upKey = upKey;
 }
