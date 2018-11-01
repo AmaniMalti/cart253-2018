@@ -22,8 +22,9 @@ function setup() {
   createCanvas(640,480);
   noStroke();
   // Create a ball
-  ball = new Ball(width/2,height/2,50,50,10,50);
+  ball = new Ball(width/2,height/2,5,5,10,5);
   // Create the right paddle with UP and DOWN as controls
+  //////////////// FIXED
   rightPaddle = new Paddle(width-10,height/2,10,60,10,UP_ARROW,DOWN_ARROW);
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
@@ -39,6 +40,7 @@ function setup() {
 // and displays everything.
 function draw() {
   background(0);
+  ball.display();
 
   leftPaddle.handleInput();
   rightPaddle.handleInput();
@@ -48,6 +50,7 @@ function draw() {
   rightPaddle.update();
 
 //////////////// FIXED
+
   if (ball.isOffScreen()){
     reset();
   }
@@ -55,7 +58,7 @@ function draw() {
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
 
-  ball.display();
+
   leftPaddle.display();
   //////////////// FIXED
   rightPaddle.display();
