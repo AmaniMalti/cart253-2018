@@ -18,6 +18,7 @@ var rightPaddle;
 //
 // Creates the ball and paddles
 function setup() {
+  //////////////// FIXED
   createCanvas(640,480);
   noStroke();
   // Create a ball
@@ -28,6 +29,7 @@ function setup() {
   // Keycodes 83 and 87 are W and S respectively
   //////////////// FIXED
   leftPaddle = new Paddle(0,height/2,10,60,10,83,87);
+}
 
 
 // draw()
@@ -44,7 +46,8 @@ function draw() {
   leftPaddle.update();
   rightPaddle.update();
 
-  if (ball.isOffTheScreen())
+//////////////// FIXED
+  if (ball.isOffTheScreen()){
     reset();
   }
 
