@@ -22,7 +22,7 @@ function setup() {
   createCanvas(640,480);
   noStroke();
   // Create a ball
-  ball = new Ball(width/2,height/2,5,5,10,50);
+  ball = new Ball(width/2,height/2,5,5,10,5);
   // Create the right paddle with UP and DOWN as controls
   //////////////// FIXED
   rightPaddle = new Paddle(width-10,height/2,10,60,10,UP_ARROW,DOWN_ARROW);
@@ -43,14 +43,28 @@ function draw() {
 
   leftPaddle.handleInput();
   rightPaddle.handleInput();
-
+//////////////// FIXED
   ball.update();
   leftPaddle.update();
   rightPaddle.update();
 
-//////////////// FIXED
-  if (ball.isOffScreen()){
-    reset();
+  //////////////// FIXED
+  // Implemented logic correctly
+  // Here the ball went off to the left side
+  if ((ball.isOffScreen()===1)) {
+    ball.reset();
+    ball.vx = ball.speed;
+    ball.vy = random (-10,10);
+    // Incrementing score
+    rightPaddle.score += 1;
+  }
+  // Here the ball went off to the right side
+  if ((ball.isOffScreen()===2)) {
+    ball.reset();
+    ball.vx = -ball.speed;
+    ball.vy = random (-10,10);
+    // Incrementing score
+    leftPaddle.score += 1;
   }
 
   ball.handleCollision(leftPaddle);
