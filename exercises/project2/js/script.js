@@ -15,8 +15,11 @@ var leftPaddle;
 var rightPaddle;
 
 ///////// NEW /////////
+var winnerIs;
+var loserScore;
 // adding variable to control game started
 var gameStarted;
+var gameEnded;
 // Adding sound variables
 var cheerSound;
 var racquetHitSound;
@@ -41,7 +44,7 @@ function setup() {
   createCanvas(640,480);
 
   gameStarted = false;
-
+  gameEnded = false;
 
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,10,5);
@@ -60,24 +63,23 @@ function draw() {
   ///////// NEW /////////
   // Adding background Image
   background(img,0)
+  if (gameEnded){
+    showGameOver();
+    if (keyIsDown(13))
+      //gameStarted = true;
+      setup();
+  }
+  else {
+
   // Game is not started yet, Displaying start page
   if (!gameStarted){
-    textSize(32);
-    textAlign(CENTER,CENTER);
-    text('Futura');
-    fill(255);
-    var title = "WELCOME TO PINGPONG IN SPACE\n";
-    text(title,width/2,height/2);
-    textSize(16);
-    var title2 = "Hit Enter key to start the game";
-    text(title2,width/2,height/2+100);
+    showStartPage();
     // Setting variable when enter key is pressed to start the game
     if (keyIsDown(13))
       gameStarted = true;
   }
     // Executed only when game is started
     else {
-
   // Here the ball went off to the left side
   if ((ball.isOffScreen()===1)) {
     ball.reset();
@@ -124,14 +126,55 @@ function draw() {
   ///////// END NEW /////////
 
   ///////// NEW /////////
-  if (rightPaddle.score == 6){
+  if (rightPaddle.score == 5){
     cheerSound.play();
-  }
+    winnerIs = "Player2";
+    loserScore = leftPaddle.score;
+    gameEnded = true;
+    }
+    //gameStarted = false;
 
-  if (leftPaddle.score == 6){
+
+  if (leftPaddle.score == 5){
     cheerSound.play();
-  }
+    winnerIs = "Player1";
+    loserScore = rightPaddle.score;
+    gameEnded = true;
+    }
+    //gameStarted = false;
+
   ///////// END NEW /////////
 
+    }
   }
 }
+  ///////// NEW /////////
+  function showStartPage(){
+    textSize(32);
+    textAlign(CENTER,CENTER);
+    text('Futura');
+    fill(255);
+    var title = "WELCOME TO PINGPONG IN SPACE\n";
+    text(title,width/2,height/2);
+    textSize(16);
+    var title2 = "Hit Enter key to start the game";
+    text(title2,width/2,height/2+100);
+  }
+
+// showGameOver()
+//
+// Display text about the game being over!
+function showGameOver() {
+  textSize(32);
+  textAlign(CENTER,CENTER);
+  text('Futura');
+  fill(255);
+  var gameOverText = "GAME OVER\n";
+  gameOverText += winnerIs + " wins  ";
+  gameOverText += "5 - " + loserScore;
+  text(gameOverText,width/2,height/2);
+  textSize(16);
+  var title2 = "Hit Enter key to start the game";
+  text(title2,width/2,height/2+100);
+}
+  ///////// END NEW /////////
