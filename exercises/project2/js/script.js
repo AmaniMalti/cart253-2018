@@ -14,7 +14,13 @@ var ball;
 var leftPaddle;
 var rightPaddle;
 
+///////// NEW /////////
+// adding variable to control game started
+var gameStarted;
+// Adding sound variables
 var cheerSound;
+var racquetHitSound;
+///////// END NEW /////////
 
 function preload() {
   ///////// NEW /////////
@@ -22,6 +28,9 @@ function preload() {
   img = loadImage('assets/images/bg.jpg');
   // Adding  winning sound
   cheerSound = new Audio("assets/sounds/cheer.wav");
+  // Adding Paddle hit sound
+  racquetHitSound = new Audio("assets/sounds/racquetHit.wav");
+  ///////// END NEW /////////
 }
 
 
@@ -30,6 +39,9 @@ function preload() {
 // Creates the ball and paddles
 function setup() {
   createCanvas(640,480);
+
+  gameStarted = false;
+
 
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,10,5);
@@ -48,8 +60,24 @@ function draw() {
   ///////// NEW /////////
   // Adding background Image
   background(img,0)
+  // Game is not started yet, Displaying start page
+  if (!gameStarted){
+    textSize(32);
+    textAlign(CENTER,CENTER);
+    text('Futura');
+    fill(255);
+    var title = "WELCOME TO PINGPONG IN SPACE\n";
+    text(title,width/2,height/2);
+    textSize(16);
+    var title2 = "Hit Enter key to start the game";
+    text(title2,width/2,height/2+100);
+    // Setting variable when enter key is pressed to start the game
+    if (keyIsDown(13))
+      gameStarted = true;
+  }
+    // Executed only when game is started
+    else {
 
-  ////// NEW
   // Here the ball went off to the left side
   if ((ball.isOffScreen()===1)) {
     ball.reset();
@@ -75,12 +103,15 @@ function draw() {
   leftPaddle.update();
   rightPaddle.update();
 
-  /*if (ball.isOffScreen()) {
-    ball.reset();
-  }*/
-
-  ball.handleCollision(leftPaddle);
-  ball.handleCollision(rightPaddle);
+  ///////// NEW /////////
+  //Adding sound when the Paddle hits the ball
+  if (ball.handleCollision(leftPaddle)){
+    racquetHitSound.play();
+  };
+  if (ball.handleCollision(rightPaddle)){
+    racquetHitSound.play();
+  };
+  ///////// END NEW /////////
 
   ball.display();
   leftPaddle.display();
@@ -91,4 +122,16 @@ function draw() {
   rightPaddle.displayScore();
   leftPaddle.displayScore();
   ///////// END NEW /////////
+
+  ///////// NEW /////////
+  if (rightPaddle.score == 6){
+    cheerSound.play();
+  }
+
+  if (leftPaddle.score == 6){
+    cheerSound.play();
+  }
+  ///////// END NEW /////////
+
+  }
 }

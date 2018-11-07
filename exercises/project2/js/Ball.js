@@ -39,22 +39,11 @@ Ball.prototype.update = function () {
 //
 // Checks if the ball has moved off the screen and, if so, returns true.
 // Otherwise it returns false.
-/*Ball.prototype.isOffScreen = function () {
-  // Check for going off screen and reset if so
-  if (this.x + this.size < 0 || this.x > width) {
-    return true;
-  }
-  else {
-    return false;
-  }
-}*/
-//////NEW
+
+///////// NEW /////////
 Ball.prototype.isOffScreen = function () {
-
- ///////// NEW /////////
  // Check for which side the ball went off screen
-
-  if (this.x - this.size > width){
+ if (this.x - this.size > width){
    // Incrementing score
    return (2);
  }
@@ -65,6 +54,7 @@ Ball.prototype.isOffScreen = function () {
     return (0);
   }
 }
+///////// END NEW /////////
 
 // display()
 //
@@ -88,8 +78,15 @@ Ball.prototype.handleCollision = function(paddle) {
       this.y -= this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
+
+      ///////// NEW /////////
+      // play Racquet Hit Sound
+      return true;
     }
   }
+      // Do not play Racquet Hit Sound
+      else return false;
+      ///////// END NEW /////////
 }
 
 // reset()
