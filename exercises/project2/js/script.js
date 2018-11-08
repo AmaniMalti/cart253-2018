@@ -11,6 +11,8 @@
 
 // Variable to contain the objects representing our ball and paddles
 var ball;
+///////// NEW /////////
+var ball2;
 var leftPaddle;
 var rightPaddle;
 
@@ -23,16 +25,21 @@ var gameEnded;
 // Adding sound variables
 var cheerSound;
 var racquetHitSound;
+var fireSound;
 ///////// END NEW /////////
 
 function preload() {
   ///////// NEW /////////
-  // Preloading background image
+  // Adding background image
   img = loadImage('assets/images/bg.jpg');
+  // Adding Ball2 image
+  img2 = loadImage('assets/images/ball2.png');
   // Adding  winning sound
   cheerSound = new Audio("assets/sounds/cheer.wav");
   // Adding Paddle hit sound
   racquetHitSound = new Audio("assets/sounds/racquetHit.wav");
+  // Adding Paddle fire ball sound
+  fireSound = new Audio("assets/sounds/fire.ogg");
   ///////// END NEW /////////
 }
 
@@ -42,12 +49,15 @@ function preload() {
 // Creates the ball and paddles
 function setup() {
   createCanvas(640,480);
-
+  ///////// NEW /////////
   gameStarted = false;
   gameEnded = false;
+  ///////// END NEW /////////
 
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,10,5);
+  ///////// NEW /////////
+  ball2 = new Ball2(width/3,height/3,5,5,10,5);
   // Create the right paddle with UP and DOWN as controls
   rightPaddle = new Paddle(width-10,height/2,10,60,10,DOWN_ARROW,UP_ARROW,0,580);
   // Create the left paddle with W and S as controls
@@ -70,7 +80,6 @@ function draw() {
       setup();
   }
   else {
-
   // Game is not started yet, Displaying start page
   if (!gameStarted){
     showStartPage();
@@ -97,11 +106,31 @@ function draw() {
     leftPaddle.score += 1;
   }
   ///////// END NEW /////////
+  ///////// NEW /////////
+  if ((ball2.isOffScreen()===1)){
+    ball2.reset();
+    ball2.vx = ball2.speed;
+    ball2.vy = random (-10,10);
+    // Incrementing score
+    //rightPaddle.score += 1;
+  }
+  // Here the ball2 went off to the right side
+  if ((ball2.isOffScreen()===2)) {
+    ball2.reset();
+    ball2.vx = -ball2.speed;
+    ball2.vy = random (-10,10);
+    // Incrementing score
+    //leftPaddle.score += 1;
+  }
+  ///////// END NEW /////////
 
   leftPaddle.handleInput();
   rightPaddle.handleInput();
 
   ball.update();
+  ///////// NEW /////////
+  ball2.update();
+  ///////// END NEW /////////
   leftPaddle.update();
   rightPaddle.update();
 
@@ -113,9 +142,20 @@ function draw() {
   if (ball.handleCollision(rightPaddle)){
     racquetHitSound.play();
   };
+
+  if (ball2.handleCollision(leftPaddle)){
+    fireSound.play();
+  };
+  if (ball2.handleCollision(rightPaddle)){
+    fireSound.play();
+  };
   ///////// END NEW /////////
 
+  ///////// END NEW /////////
   ball.display();
+  ///////// NEW /////////
+  ball2.display();
+  ///////// END NEW /////////
   leftPaddle.display();
   rightPaddle.display();
 
@@ -126,7 +166,7 @@ function draw() {
   ///////// END NEW /////////
 
   ///////// NEW /////////
-  if (rightPaddle.score == 5){
+  if (rightPaddle.score == 20){
     cheerSound.play();
     winnerIs = "Player2";
     loserScore = leftPaddle.score;
@@ -135,14 +175,13 @@ function draw() {
     //gameStarted = false;
 
 
-  if (leftPaddle.score == 5){
+  if (leftPaddle.score == 20){
     cheerSound.play();
     winnerIs = "Player1";
     loserScore = rightPaddle.score;
     gameEnded = true;
     }
     //gameStarted = false;
-
   ///////// END NEW /////////
 
     }
@@ -162,7 +201,6 @@ function draw() {
   }
 
 // showGameOver()
-//
 // Display text about the game being over!
 function showGameOver() {
   textSize(32);
@@ -171,7 +209,7 @@ function showGameOver() {
   fill(255);
   var gameOverText = "GAME OVER\n";
   gameOverText += winnerIs + " wins  ";
-  gameOverText += "5 - " + loserScore;
+  gameOverText += "20 - " + loserScore;
   text(gameOverText,width/2,height/2);
   textSize(16);
   var title2 = "Hit Enter key to start the game";
