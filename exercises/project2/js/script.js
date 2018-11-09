@@ -42,6 +42,7 @@ function preload() {
   img2 = loadImage('assets/images/ball2.png');
   // Adding SpaceShip image
   img3 = loadImage('assets/images/spaceShip.png');
+  console.log ("spaceShip");
   // Adding  winning sound
   cheerSound = new Audio("assets/sounds/cheer.wav");
   // Adding Paddle hit sound
