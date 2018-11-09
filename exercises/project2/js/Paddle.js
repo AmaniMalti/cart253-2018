@@ -6,7 +6,7 @@
 // Paddle constructor
 //
 // Sets the properties with the provided arguments or defaults
-function Paddle(x,y,w,h,speed,downKey,upKey,score,displayX) {
+function Paddle(x, y, w, h, speed, downKey, upKey, score, displayX) {
   this.x = x;
   this.y = y;
   this.vx = 0;
@@ -31,11 +31,9 @@ function Paddle(x,y,w,h,speed,downKey,upKey,score,displayX) {
 Paddle.prototype.handleInput = function() {
   if (keyIsDown(this.upKey)) {
     this.vy = -this.speed;
-  }
-  else if (keyIsDown(this.downKey)) {
+  } else if (keyIsDown(this.downKey)) {
     this.vy = this.speed;
-  }
-  else {
+  } else {
     this.vy = 0;
   }
 }
@@ -45,7 +43,7 @@ Paddle.prototype.handleInput = function() {
 // Constrain the resulting position to be within the canvas
 Paddle.prototype.update = function() {
   this.y += this.vy;
-  this.y = constrain(this.y,0,height-this.h);
+  this.y = constrain(this.y, 0, height - this.h);
 }
 
 // display()
@@ -53,16 +51,16 @@ Paddle.prototype.update = function() {
 // Draw the paddle as a rectangle on the screen
 Paddle.prototype.display = function() {
   fill(255);
-  rect(this.x,this.y,this.w,this.h,20);
+  rect(this.x, this.y, this.w, this.h, 20);
 
   ///////// NEW  /////////
   Paddle.prototype.displayScore = function() {
-  // Added text to show the score of Player
-  text(this.score,this.displayX,50);
-  textAlign(CENTER);
-  textSize(20);
-  textStyle(BOLD);
-  textFont('FUTURA');
-}
- ///////// END NEW /////////
+    // Added text to show the score of Player
+    text(this.score, this.displayX, 50);
+    textAlign(CENTER);
+    textSize(20);
+    textStyle(BOLD);
+    textFont('FUTURA');
+  }
+  ///////// END NEW /////////
 }

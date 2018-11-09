@@ -8,7 +8,7 @@
 // Ball2 constructor
 //
 // Sets the properties with the provided arguments
-function Ball2(x,y,vx,vy,size,speed) {
+function Ball2(x, y, vx, vy, size, speed) {
   this.x = x;
   this.y = y;
   this.vx = vx;
@@ -22,13 +22,13 @@ function Ball2(x,y,vx,vy,size,speed) {
 // Moves according to velocity, constrains y to be on screen,
 // checks for bouncing on upper or lower edgs, checks for going
 // off left or right side.
-Ball2.prototype.update = function () {
+Ball2.prototype.update = function() {
   // Update position with velocity
   this.x += this.vx;
   this.y += this.vy;
 
   // Constrain y position to be on screen
-  this.y = constrain(this.y,0,height-this.size);
+  this.y = constrain(this.y, 0, height - this.size);
 
   // Check for touching upper or lower edge and reverse velocity if so
   if (this.y === 0 || this.y + this.size === height) {
@@ -40,16 +40,14 @@ Ball2.prototype.update = function () {
 //
 // Checks if the ball has moved off the screen and, if so, returns true.
 // Otherwise it returns false.
-Ball2.prototype.isOffScreen = function () {
- // Check for which side the ball went off screen
- if (this.x - this.size > width){
-   // Incrementing score
-   return (2);
- }
-  else if (this.x + this.size < 0 ) {
+Ball2.prototype.isOffScreen = function() {
+  // Check for which side the ball went off screen
+  if (this.x - this.size > width) {
+    // Incrementing score
+    return (2);
+  } else if (this.x + this.size < 0) {
     return (1);
-  }
-  else {
+  } else {
     return (0);
   }
 }
@@ -57,9 +55,9 @@ Ball2.prototype.isOffScreen = function () {
 // display()
 //
 // Draw the ball as a rectangle on the screen
-Ball2.prototype.display = function () {
+Ball2.prototype.display = function() {
   imageMode(CORNER);
-  image(img2, this.x,this.y,50,32);
+  image(img2, this.x, this.y, 50, 32);
 
 }
 
@@ -77,7 +75,7 @@ Ball2.prototype.handleCollision = function(paddle) {
       paddle.w -= 1;
       paddle.h -= 3;
       ///////// END NEW /////////
-    // If so, move ball2 back to previous position (by subtracting current velocity)
+      // If so, move ball2 back to previous position (by subtracting current velocity)
       this.x -= this.vx;
       this.y -= this.vy;
       // Reverse x velocity to bounce
@@ -87,16 +85,16 @@ Ball2.prototype.handleCollision = function(paddle) {
       return true;
     }
   }
-      // Do not play Racquet Hit Sound
-      else return false;
-      ///////// END NEW /////////
+  // Do not play Racquet Hit Sound
+  else return false;
+  ///////// END NEW /////////
 }
 
 // reset()
 //
 // Set position back to the middle of the screen
-Ball2.prototype.reset = function () {
-  this.x = width/3;
-  this.y = height/3;
+Ball2.prototype.reset = function() {
+  this.x = width / 3;
+  this.y = height / 3;
 }
 ///////// END NEW /////////

@@ -1,18 +1,19 @@
-// Ball
+///////// NEW /////////
+// Ball5
 //
-// A class to define how a ball behaves. Including bouncing on the top
+// A class to define how balls behaves. Including bouncing on the top
 // and bottom edges of the canvas, going off the left and right sides,
 // and bouncing off paddles.
 
-// Ball constructor
+// Ball5 constructor
 //
 // Sets the properties with the provided arguments
-function Ball(x, y, vx, vy, size, speed) {
+function Ball5(x, y, vx, vy, size, speed) {
   this.x = x;
   this.y = y;
   this.vx = vx;
   this.vy = vy;
-  this.size = 15;
+  this.size = 10;
   this.speed = speed;
   this.fill = 100;
 }
@@ -22,7 +23,7 @@ function Ball(x, y, vx, vy, size, speed) {
 // Moves according to velocity, constrains y to be on screen,
 // checks for bouncing on upper or lower edgs, checks for going
 // off left or right side.
-Ball.prototype.update = function() {
+Ball5.prototype.update = function() {
   // Update position with velocity
   this.x += this.vx;
   this.y += this.vy;
@@ -38,12 +39,12 @@ Ball.prototype.update = function() {
 
 // isOffScreen()
 //
-// Checks if the ball has moved off the screen and, if so, returns true.
+// Checks if the balls has moved off the screen and, if so, returns true.
 // Otherwise it returns false.
 
 ///////// NEW /////////
-Ball.prototype.isOffScreen = function() {
-  // Check for which side the ball went off screen
+Ball5.prototype.isOffScreen = function() {
+  // Check for which side the balls went off screen
   if (this.x - this.size > width) {
     // Incrementing score
     return (2);
@@ -57,18 +58,19 @@ Ball.prototype.isOffScreen = function() {
 
 // display()
 //
-// Draw the ball as a rectangle on the screen
-Ball.prototype.display = function() {
+// Draw the balls as a rectangle on the screen
+Ball5.prototype.display = function() {
   noStroke();
-  fill(255);
+  fill('#fae');
   ellipse(this.x, this.y, this.size, this.size);
+
 }
 
 // handleCollision(paddle)
 //
-// Check if this ball overlaps the paddle passed as an argument
+// Check if all the balls overlap the paddle passed as an argument
 // and if so reverse x velocity to bounce
-Ball.prototype.handleCollision = function(paddle) {
+Ball5.prototype.handleCollision = function(paddle) {
   // Check if the ball overlaps the paddle on x axis
   if (this.x + this.size > paddle.x && this.x < paddle.x + paddle.w) {
     // Check if the ball overlaps the paddle on y axis
@@ -87,38 +89,12 @@ Ball.prototype.handleCollision = function(paddle) {
   else return false;
   ///////// END NEW /////////
 }
-///////// NEW /////////
-// handleCollision(SpaceShip)
-//
-// Check if this SpaceShip overlaps the ball
-// and if so reverse x velocity to bounce
-Ball.prototype.handleCollisionSpaceShip = function(SpaceShip) {
-  // Check if the ball overlaps the paddle on x axis
-  if (this.x + this.size > SpaceShip.x && this.x < SpaceShip.x + SpaceShip.w) {
-    // Check if the ball overlaps the paddle on y axis
-    if (this.y + this.size > SpaceShip.y && this.y < SpaceShip.y + SpaceShip.h) {
-      // If so, move ball back to previous position (by subtracting current velocity)
-      console.log("collisions");
-      this.x -= 4 * this.vx;
-      this.y -= 4 * this.vy;
-      this.vx += 3;
-      this.vy += 5;
-      // Reverse x velocity to bounce
-      this.vx = -this.vx;
-      ///////// NEW /////////
-      // play Racquet Hit Sound
-      return true;
-    }
-  }
-  // Do not play Racquet Hit Sound
-  else return false;
-  ///////// END NEW /////////
-}
 
 // reset()
 //
 // Set position back to the middle of the screen
-Ball.prototype.reset = function() {
+Ball5.prototype.reset = function() {
   this.x = width / 2;
   this.y = height / 2;
 }
+///////// END NEW /////////

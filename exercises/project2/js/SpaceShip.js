@@ -7,13 +7,13 @@
 // Ball constructor
 //
 // Sets the properties with the provided arguments
-function SpaceShip(x,y,vx,vy,w,h,speed) {
+function SpaceShip(x, y, vx, vy, w, h, speed) {
   this.x = x;
   this.y = y;
   this.vx = vx;
   this.vy = vy;
-  this.w = w;
-  this.h = h;
+  this.w = 75;
+  this.h = 75;
   this.speed = speed;
 
 }
@@ -23,13 +23,13 @@ function SpaceShip(x,y,vx,vy,w,h,speed) {
 // Moves according to velocity, constrains y to be on screen,
 // checks for bouncing on upper or lower edgs, checks for going
 // off left or right side.
-SpaceShip.prototype.update = function () {
+SpaceShip.prototype.update = function() {
   // Update position with velocity
   this.x += this.vx;
   this.y += this.vy;
 
   // Constrain y position to be on screen
-  this.y = constrain(this.y,0,height-this.h);
+  this.y = constrain(this.y, 0, height - this.h);
 
   // Check for touching upper or lower edge and reverse velocity if so
   if (this.y === 0 || this.y + this.h === height) {
@@ -43,16 +43,14 @@ SpaceShip.prototype.update = function () {
 // Otherwise it returns false.
 
 ///////// NEW /////////
-SpaceShip.prototype.isOffScreen = function () {
- // Keep the SpaceShip inside the canvas
- if (this.x + this.w > width){
-   // Incrementing score
-   return (2);
- }
-  else if (this.x + this.w < 0 ) {
+SpaceShip.prototype.isOffScreen = function() {
+  // Keep the SpaceShip inside the canvas
+  if (this.x + this.w > width) {
+    // Incrementing score
+    return (2);
+  } else if (this.x + this.w < 0) {
     return (1);
-  }
-  else {
+  } else {
     return (0);
   }
 }
@@ -61,16 +59,7 @@ SpaceShip.prototype.isOffScreen = function () {
 // display()
 //
 // Draw the SpaceShip as a rectangle on the screen
-SpaceShip.prototype.display = function () {
+SpaceShip.prototype.display = function() {
   imageMode(CORNER);
-  image(img3, this.x,this.y,75,75);
-}
-
-
-// reset()
-//
-// Set position back to the middle of the screen
-SpaceShip.prototype.reset = function () {
-  this.x = width/2;
-  this.y = height/2;
+  image(img3, this.x, this.y, 75, 75);
 }
