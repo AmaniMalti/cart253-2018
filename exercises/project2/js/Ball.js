@@ -12,8 +12,9 @@ function Ball(x,y,vx,vy,size,speed) {
   this.y = y;
   this.vx = vx;
   this.vy = vy;
-  this.size = size;
+  this.size = 10;
   this.speed = speed;
+  this.fill = 100;
 }
 
 // update()
@@ -61,7 +62,7 @@ Ball.prototype.isOffScreen = function () {
 // Draw the ball as a rectangle on the screen
 Ball.prototype.display = function () {
   fill(255);
-  rect(this.x,this.y,this.size,this.size);
+  ellipse(this.x,this.y,this.size,this.size);
 }
 
 // handleCollision(paddle)
@@ -76,6 +77,33 @@ Ball.prototype.handleCollision = function(paddle) {
       // If so, move ball back to previous position (by subtracting current velocity)
       this.x -= this.vx;
       this.y -= this.vy;
+      // Reverse x velocity to bounce
+      this.vx = -this.vx;
+      ///////// NEW /////////
+      // play Racquet Hit Sound
+      return true;
+    }
+  }
+      // Do not play Racquet Hit Sound
+      else return false;
+      ///////// END NEW /////////
+}
+///////// NEW /////////
+// handleCollision(SpaceShip)
+//
+// Check if this SpaceShip overlaps the ball 
+// and if so reverse x velocity to bounce
+Ball.prototype.handleCollisionSpaceShip = function(SpaceShip) {
+  // Check if the ball overlaps the paddle on x axis
+  if (this.x + this.size > SpaceShip.x && this.x < SpaceShip.x + SpaceShip.w) {
+    // Check if the ball overlaps the paddle on y axis
+    if (this.y + this.size > SpaceShip.y && this.y < SpaceShip.y + SpaceShip.h) {
+      // If so, move ball back to previous position (by subtracting current velocity)
+      console.log ("collisions");
+      this.x -= 4*this.vx;
+      this.y -= 4*this.vy;
+      this.vx += 3;
+      this.vy += 5;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
       ///////// NEW /////////

@@ -5,7 +5,7 @@
 // and bottom edges of the canvas, going off the left and right sides,
 // and bouncing off paddles.
 
-// Ball constructor
+// Ball2 constructor
 //
 // Sets the properties with the provided arguments
 function Ball2(x,y,vx,vy,size,speed) {
@@ -58,7 +58,6 @@ Ball2.prototype.isOffScreen = function () {
 //
 // Draw the ball as a rectangle on the screen
 Ball2.prototype.display = function () {
-  fill(100);
   imageMode(CORNER);
   image(img2, this.x,this.y,50,32);
 
@@ -74,11 +73,11 @@ Ball2.prototype.handleCollision = function(paddle) {
     // Check if the ball overlaps the paddle on y axis
     if (this.y + this.size > paddle.y && this.y < paddle.y + paddle.h) {
       ///////// NEW /////////
-      // When ball 2 hits one of the paddle the size reduces by 1 in the weight and 3 in the height
+      // When ball2 hits one of the paddle the size reduces by 1 in the weight and 3 in the height
       paddle.w -= 1;
       paddle.h -= 3;
       ///////// END NEW /////////
-    // If so, move ball back to previous position (by subtracting current velocity)
+    // If so, move ball2 back to previous position (by subtracting current velocity)
       this.x -= this.vx;
       this.y -= this.vy;
       // Reverse x velocity to bounce
