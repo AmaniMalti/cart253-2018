@@ -2,6 +2,7 @@
 var eyeSize = 100;
 var eyeBallSize = 50;
 var eyeShapeSize = 110;
+var eyeBallColour = 255;
 
 function setup() {
   // Make Canvas full screen
@@ -14,7 +15,7 @@ function setup() {
 }
 
 function draw() {
-    background('#fae');
+  background('#fae');
   // Drawing the eyelashes
   strokeWeight(4);
   line(width/2 - 80, height/2, width/2 - 90, height/2 - 90);
