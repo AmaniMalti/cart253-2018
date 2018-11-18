@@ -33,4 +33,15 @@ function draw() {
   strokeWeight(1);
   leftEye.drawEyes();
   rightEye.drawEyes();
+  showText();
+}
+function showText(){
+  push();
+  textAlign(CENTER, CENTER);
+  textSize(25);
+  text('Futura');
+  fill(255);
+  // Display the text
+  text("Click mouse to make my eyes blink", width / 2, height / 2 + 150);
+  pop();
 }
