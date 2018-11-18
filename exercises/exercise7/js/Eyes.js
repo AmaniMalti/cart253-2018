@@ -7,11 +7,15 @@ function Eyes(x) {
   this.yb = height/2;
   this.sizeX = eyeBallSize;
   this.sizeY = eyeBallSize;
+  this.sizeShapeX = eyeShapeSize;
+  this.sizeShapeY = eyeShapeSize;
 
 // Drawing the eyes
   this.drawEyes = function() {
+    fill(30);
+    ellipse(this.x, this.y, this.sizeShapeX, this.sizeShapeY);
     fill(255);
-  	ellipse(this.x, height/2, eyeSize, eyeSize);
+  	ellipse(this.x, this.y, eyeSize, eyeSize);
     fill(0);
     ellipse(this.xb, this.yb, this.sizeX, this.sizeY);
   }

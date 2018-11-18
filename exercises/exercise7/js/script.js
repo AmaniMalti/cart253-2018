@@ -1,6 +1,7 @@
 // Setting variables for eye size and eye ball size
 var eyeSize = 100;
 var eyeBallSize = 50;
+var eyeShapeSize = 110;
 
 function setup() {
   // Make Canvas full screen
@@ -9,15 +10,26 @@ function setup() {
   leftEye = new Eyes(width/2 - 80);
   // Create right eye
   rightEye = new Eyes(width/2 + 80);
+
 }
 
 function draw() {
+    background('#fae');
+  // Drawing the eyelashes
+  strokeWeight(4);
+  line(width/2 - 80, height/2, width/2 - 90, height/2 - 90);
+  strokeWeight(4);
+  line(width/2 - 80, height/2, width/2 - 135, height/2 - 85);
+  strokeWeight(4);
+  line(width/2 - 80, height/2, width/2 - 180, height/2 - 80);
+  strokeWeight(4);
+  line(width/2 + 80, height/2, width/2 + 90, height/2 - 90);
+  strokeWeight(4);
+  line(width/2 + 80, height/2, width/2 + 135, height/2 - 85);
+  strokeWeight(4);
+  line(width/2 + 80, height/2, width/2 + 180, height/2 - 80);
   // Drawing the eyes in their position
   strokeWeight(1);
-  fill(30);
-  ellipse(width/2 - 80, height/2, 110, 110);
-  fill(30);
-  ellipse(width/2 + 80, height/2, 110, 110);
   leftEye.drawEyes();
   rightEye.drawEyes();
 }
