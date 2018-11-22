@@ -47,6 +47,13 @@ function Eyes(x) {
     line(width/2 + 80, height/2, width/2 + 180, height/2 + 80);
 }
   Eyes.prototype.drawEyes = function() {
+    // Controlling the drawing of the upper lashes or the lower lashes
+    if (this.lashes == 0) {
+   this.drawUpperLashes();
+   }
+   else {
+   this.drawLowerLashes();
+   }
     // Drawing the eyes
     fill(30);
     ellipse(this.x, this.y, this.sizeShapeX, this.sizeShapeY);
@@ -55,10 +62,13 @@ function Eyes(x) {
     fill(0);
     ellipse(this.xb, this.yb, this.sizeX, this.sizeY);
 
+    // Controlling the event of blinking by clicking the mouse
     if (mouseIsPressed) {
       this.eyeBallColour = 0;
-    } else {
+      this.lashes = 1;
+   } else {
       this.eyeBallColour = 255;
+      this.lashes = 0;
     }
   }
 }
