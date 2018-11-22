@@ -11,9 +11,43 @@ function Eyes(x) {
   this.sizeShapeX = eyeShapeSize;
   this.sizeShapeY = eyeShapeSize;
   this.eyeBallColour = eyeBallColour;
+  // Adding lashes property to the class
+  this.lashes = 0;
 
-// Drawing the eyes
-  this.drawEyes = function() {
+
+  Eyes.prototype.drawUpperLashes = function() {
+    // Drawing the upper eyelashes function of the left and the right eye
+    strokeWeight(4);
+    line(width/2 - 87, height/2 - 55, width/2 - 90, height/2 -90);
+    strokeWeight(4);
+    line(width/2 - 107, height/2 - 45, width/2 - 135, height/2 - 85);
+    strokeWeight(4);
+    line(width/2 - 122, height/2 - 34, width/2 - 180, height/2 - 80);
+    strokeWeight(4);
+    line(width/2 + 80, height/2, width/2 + 90, height/2 - 90);
+    strokeWeight(4);
+    line(width/2 + 80, height/2, width/2 + 135, height/2 - 85);
+    strokeWeight(4);
+    line(width/2 + 80, height/2, width/2 + 180, height/2 - 80);
+}
+
+  Eyes.prototype.drawLowerLashes = function() {
+    // Drawing the lower function eyelashes of the left and the right eye
+    strokeWeight(4);
+    line(width/2 - 80, height/2, width/2 - 90, height/2 +90);
+    strokeWeight(4);
+    line(width/2 - 80, height/2, width/2 - 135, height/2 + 85);
+    strokeWeight(4);
+    line(width/2 - 80, height/2, width/2 - 180, height/2 + 80);
+    strokeWeight(4);
+    line(width/2 + 80, height/2, width/2 + 90, height/2 + 90);
+    strokeWeight(4);
+    line(width/2 + 80, height/2, width/2 + 135, height/2 + 85);
+    strokeWeight(4);
+    line(width/2 + 80, height/2, width/2 + 180, height/2 + 80);
+}
+  Eyes.prototype.drawEyes = function() {
+    // Drawing the eyes
     fill(30);
     ellipse(this.x, this.y, this.sizeShapeX, this.sizeShapeY);
     fill(this.eyeBallColour);
