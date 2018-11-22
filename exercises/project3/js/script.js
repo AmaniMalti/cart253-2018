@@ -1,3 +1,6 @@
+// Prototype 2 for Final project
+// By Amani Malti
+// Inspired by this project
 // Setting variables for eye size and eye ball size
 var eyeSize = 100;
 var eyeBallSize = 50;
