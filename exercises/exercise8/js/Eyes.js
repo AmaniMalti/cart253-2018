@@ -13,7 +13,7 @@ function Eyes(x) {
   this.eyeBallColour = eyeBallColour;
   // Adding lashes property to the class
   this.lashes = 0;
-
+}
 
   Eyes.prototype.drawUpperLashes = function() {
     // Drawing the upper eyelashes function of the left and the right eye
@@ -46,6 +46,7 @@ function Eyes(x) {
     strokeWeight(4);
     line(width/2 + 80, height/2, width/2 + 180, height/2 + 80);
 }
+
   Eyes.prototype.drawEyes = function() {
     // Controlling the drawing of the upper lashes or the lower lashes
     if (this.lashes == 0) {
@@ -71,4 +72,15 @@ function Eyes(x) {
       this.lashes = 0;
     }
   }
+
+
+  Eyes.prototype.rotate = function(angle, length) {
+    //  Controlling the rotation of the eyes when following a target
+    if (length < 20) this.xb = this.x + cos(angle)*length;
+    else this.xb = this.x + cos(angle)*30;
+    if (length < 20) this.yb = this.y + sin(angle)*length;
+    else this.yb = this.y + sin(angle)*30;
+    if (this.xb > this.x + 30 || this.xb < this.x - 30) this.xb = this.x + cos(angle)*30;
+    if (this.yb > this.y + 30 || this.yb < this.y - 30) this.yb = this.y + sin(angle)*30;
+
 }
