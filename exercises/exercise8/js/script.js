@@ -4,6 +4,12 @@ var eyeSize = 100;
 var eyeBallSize = 50;
 var eyeShapeSize = 110;
 var eyeBallColour = 255;
+// Variable for new the new ball object
+var ball;
+// Variable that calculates the angle (in radians) from the ball position to the coordinate origin as measured from the positive x-axis
+var a = 0;
+// A fraction of the distance between the ball and the the center of the canvas
+var length = 0;
 
 function setup() {
   // Create a canvas the size of the window
@@ -18,6 +24,9 @@ function setup() {
   leftEye = new Eyes(width/2 - 80);
   // Create right eye
   rightEye = new Eyes(width/2 + 80);
+  // Create a ball
+  ball = new Ball(width / 2, height / 2, 20, 25, 40, 150);
+
 }
 
 // Draw something so we can see it in the background
@@ -30,8 +39,19 @@ function draw() {
   strokeWeight(1);
   leftEye.drawEyes();
   rightEye.drawEyes();
-
+  // Updating the ball position
+  ball.update();
+  // Angle calculation
+  a = atan2(ball.y - height/2, ball.x - width/2);
+  // Proportional distance
+  length = dist(ball.x, ball.y, width/2, height/2)/15;
+  // Rotating the eyes so it follows the ball
+  leftEye.rotate(a, length);
+  rightEye.rotate(a, length);
+  // Displaying the ball
+  ball.display();
 }
+
 function drawFace_closedJaw(){
   // Drawing Chameleon's face
   fill('hsb(160, 100%, 50%)');
