@@ -29,6 +29,7 @@ function draw() {
   line(width/2 + 80, height/2, width/2 + 135, height/2 - 85);
   strokeWeight(4);
   line(width/2 + 80, height/2, width/2 + 180, height/2 - 80);
+
   // Drawing the eyes in their position
   strokeWeight(1);
   leftEye.drawEyes();
