@@ -1,9 +1,7 @@
 // Ball
-//
 // A class to define how a ball behaves when reaching the edges of the canvas: it will just bounce
 
 // Ball constructor
-//
 // Sets the properties with the provided arguments
 function Ball(x, y, vx, vy, size, speed) {
   this.x = x;
@@ -16,7 +14,6 @@ function Ball(x, y, vx, vy, size, speed) {
 }
 
 // update()
-//
 // Moves according to velocity, constrains y to be on screen,
 // checks for bouncing on upper or lower edgs, checks for going
 // off left or right side.
