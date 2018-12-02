@@ -9,22 +9,22 @@ var eyeSize = 100;
 var eyeBallSize = 50;
 var eyeShapeSize = 110;
 var eyeBallColour = 255;
-// Variable for ball object
-var ball;
-var ball1;
-var ball2;
-var ball3;
-var ball4;
-var ball5;
+// Variable for fly object
+var fly;
+var fly1;
+var fly2;
+var fly3;
+var fly4;
+var fly5;
 // Variable that defines max speed
 var maxSpeed = 15;
-// Variable that calculates the angle (in radians) from the ball position to the coordinate origin as measured from the positive x-axis
+// Variable that calculates the angle (in radians) from the fly position to the coordinate origin as measured from the positive x-axis
 var a = 0;
-// A fraction of the distance between the ball and the the center of the canvas
+// A fraction of the distance between the fly and the the center of the canvas
 var length = 0;
 
 function preload() {
-  // Adding image of fly to replace the ball
+  // Adding image of fly to replace the fly
   img1 = loadImage('assets/images/blackFly.png');
   img2 = loadImage('assets/images/greyFly.png');
   img3 = loadImage('assets/images/greenFly.png');
@@ -46,12 +46,12 @@ function setup() {
   leftEye = new Eyes(width/2 - 80);
   // Create right eye
   rightEye = new Eyes(width/2 + 80);
-  // Create the balls
-  ball1 = new Ball(width / 2, height / 2, 20, 25, 40, 150,random(0,1000), random(0,1000),img1);
-  ball2 = new Ball(width / 2, height / 2, 20, 25, 40, 150,random(0,1000), random(0,1000),img2);
-  ball3 = new Ball(width / 2, height / 2, 20, 25, 40, 150,random(0,1000), random(0,1000),img3);
-  ball4 = new Ball(width / 2, height / 2, 20, 25, 40, 150,random(0,1000), random(0,1000),img4);
-  ball5 = new Ball(width / 2, height / 2, 20, 25, 40, 150,random(0,1000), random(0,1000),img5);
+  // Create the flys
+  fly1 = new fly(width / 2, height / 2, 20, 25, 40, 150,random(0,1000), random(0,1000),img1);
+  fly2 = new fly(width / 2, height / 2, 20, 25, 40, 150,random(0,1000), random(0,1000),img2);
+  fly3 = new fly(width / 2, height / 2, 20, 25, 40, 150,random(0,1000), random(0,1000),img3);
+  fly4 = new fly(width / 2, height / 2, 20, 25, 40, 150,random(0,1000), random(0,1000),img4);
+  fly5 = new fly(width / 2, height / 2, 20, 25, 40, 150,random(0,1000), random(0,1000),img5);
 
 }
 
@@ -67,68 +67,68 @@ function draw() {
   rightEye.drawEyes();
 
   // Vx and Vy are randomly defined as the perlin noise algorithme
-  ball1.calculateVelocity();
-  ball2.calculateVelocity();
-  ball3.calculateVelocity();
-  ball4.calculateVelocity();
-  ball5.calculateVelocity();
+  fly1.calculateVelocity();
+  fly2.calculateVelocity();
+  fly3.calculateVelocity();
+  fly4.calculateVelocity();
+  fly5.calculateVelocity();
 
-  // Updating the balls position
-  ball1.update();
-  ball2.update();
-  ball3.update();
-  ball4.update();
-  ball5.update();
+  // Updating the flys position
+  fly1.update();
+  fly2.update();
+  fly3.update();
+  fly4.update();
+  fly5.update();
 
-  // Adding Proportional distance between the balls and the eyes
-  length1 = ball1.howFarIs();
-  length2 = ball2.howFarIs();
-  length3 = ball3.howFarIs();
-  length4 = ball4.howFarIs();
-  length5 = ball5.howFarIs();
+  // Adding Proportional distance between the flys and the eyes
+  length1 = fly1.howFarIs();
+  length2 = fly2.howFarIs();
+  length3 = fly3.howFarIs();
+  length4 = fly4.howFarIs();
+  length5 = fly5.howFarIs();
 
   length = min(length1,length2,length3,length4,length5);
   if(length == length1) {
-	ball = ball1;
+	fly = fly1;
   }
   else if(length == length2) {
-	  ball = ball2;
+	  fly = fly2;
   }
   else if(length == length3) {
-	  ball = ball3;
+	  fly = fly3;
   }
   else if(length == length4) {
-	  ball = ball4;
+	  fly = fly4;
   }
-  else ball = ball5;
+  else fly = fly5;
 
   // Angle calculation
-  a = atan2(ball.y - height/2, ball.x - width/2);
+  a = atan2(fly.y - height/2, fly.x - width/2);
 
-  // Rotating the eyes so it follows the ball
+  // Rotating the eyes so it follows the fly
   leftEye.rotate(a, length);
   rightEye.rotate(a, length);
-  // Displaying the ball
-  //image(img,this.x, this.y, this.size, this.size);
-  ball1.display();
-  ball1.tx += 0.03;
-  ball1.ty += 0.02;
 
-  ball2.display();
-  ball2.tx += 0.02;
-  ball2.ty += 0.01;
+  // Displaying the fly
+  fly1.display();
+  fly1.tx += 0.03;
+  fly1.ty += 0.02;
 
-  ball3.display();
-  ball3.tx += 0.03;
-  ball3.ty += 0.01;
+  fly2.display();
+  fly2.tx += 0.02;
+  fly2.ty += 0.01;
 
-  ball4.display();
-  ball4.tx += 0.02;
-  ball4.ty += 0.02;
+  fly3.display();
+  fly3.tx += 0.03;
+  fly3.ty += 0.01;
 
-  ball5.display();
-  ball5.tx += 0.01;
-  ball5.ty += 0.01;
+  fly4.display();
+  fly4.tx += 0.02;
+  fly4.ty += 0.02;
+
+  fly5.display();
+  fly5.tx += 0.01;
+  fly5.ty += 0.01;
 }
 
 function drawFace_closedJaw(){

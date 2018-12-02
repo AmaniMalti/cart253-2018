@@ -1,5 +1,5 @@
 // Eyes
-// A class that defines the eyes, the eye balls, the eyelashes and that draws them
+// A class that defines the eyes, the eye Flys, the eyelashes and that draws them
 function Eyes(x) {
   this.click = 0;
   this.x = x;

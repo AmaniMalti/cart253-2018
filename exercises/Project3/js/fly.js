@@ -1,9 +1,9 @@
-// Ball
-// A class to define how the balls would behave when reaching the edges of the canvas: they will just bounce
+// fly
+// A class to define how the flys would behave when reaching the edges of the canvas: they will just bounce
 
-// Ball constructor
+// fly constructor
 // Sets the properties with the provided arguments
-function Ball(x, y, vx, vy, size, speed,tx,ty,imgfly) {
+function fly(x, y, vx, vy, size, speed,tx,ty,imgfly) {
   this.x = x;
   this.y = y;
   this.vx = vx;
@@ -20,7 +20,7 @@ function Ball(x, y, vx, vy, size, speed,tx,ty,imgfly) {
 // Moves according to velocity, constrains y to be on screen,
 // checks for bouncing on upper or lower edgs, checks for going
 // off left or right side.
-Ball.prototype.update = function() {
+fly.prototype.update = function() {
   // Update position with velocity
   this.x += this.vx;
   this.y += this.vy;
@@ -46,24 +46,24 @@ Ball.prototype.update = function() {
 
 // display()
 //
-// Draw the ball
-Ball.prototype.display = function() {
+// Draw the fly
+fly.prototype.display = function() {
   image(this.imgfly,this.x, this.y, this.size, this.size);
 }
 
 // Angle calculation
-Ball.prototype.followMe = function() {
+fly.prototype.followMe = function() {
   a = atan2(this.y - height/2, this.x - width/2);
   return a;
 }
 
 // Proportional distance
-Ball.prototype.howFarIs = function() {
+fly.prototype.howFarIs = function() {
   length = dist(this.x, this.y, width/2, height/2)/15;
   return length;
 }
 
-Ball.prototype.calculateVelocity = function() {
+fly.prototype.calculateVelocity = function() {
   this.vx = map(noise(this.tx),0,1,-maxSpeed,maxSpeed);
   this.vy = map(noise(this.ty),0,1,-maxSpeed,maxSpeed);
 }
