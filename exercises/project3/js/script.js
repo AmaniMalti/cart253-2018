@@ -108,7 +108,7 @@ function draw() {
   if (length < 15) {
 	//drawFace_openJaw();
   push();
-  stroke(255, 204, 0);
+  stroke('#fae');
 	strokeWeight(40);
     line(width/2, 6.2 *height/8, balls[j].x, balls[j].y);
   pop();
