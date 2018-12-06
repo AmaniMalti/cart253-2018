@@ -1,9 +1,9 @@
-// ball
+// Balls
 // A class to define how the balls would behave when reaching the edges of the canvas: they will just bounce
 
 // ball constructor
 // Sets the properties with the provided arguments
-function ball(x,y,vx,vy,size,speed,tx,ty,r,g,b,dist) {
+function balls(x,y,vx,vy,size,speed,tx,ty,r,g,b,dist) {
   this.x = x;
   this.y = y;
   this.vx = vx;
