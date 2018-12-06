@@ -24,12 +24,6 @@ var a = 0;
 var length = 30;
 
 
-function preload() {
-  // Background image
-img = loadImage('assets/images/bg1.jpg');
-}
-
-
 function setup() {
   // Create a canvas the size of the window
   //createCanvas(windowWidth,windowHeight);
