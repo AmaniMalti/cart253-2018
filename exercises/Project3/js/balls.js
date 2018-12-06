@@ -1,7 +1,7 @@
-// Balls
-// A class to define how the balls would behave when reaching the edges of the canvas: they will just bounce
+// ballss
+// A class to define how the ballss would behave when reaching the edges of the canvas: they will just bounce
 
-// ball constructor
+// balls constructor
 // Sets the properties with the provided arguments
 function balls(x,y,vx,vy,size,speed,tx,ty,r,g,b,dist) {
   this.x = x;
@@ -22,7 +22,7 @@ function balls(x,y,vx,vy,size,speed,tx,ty,r,g,b,dist) {
 // Moves according to velocity, constrains y to be on screen,
 // checks for bouncing on upper or lower edgs, checks for going
 // off left or right side.
-ball.prototype.update = function() {
+balls.prototype.update = function() {
   // Update position with velocity
   this.x += this.vx;
   this.y += this.vy;
@@ -48,31 +48,31 @@ ball.prototype.update = function() {
 
 // display()
 //
-// Draw the ball
-ball.prototype.display = function() {
+// Draw the balls
+balls.prototype.display = function() {
   imageMode(CENTER);
   push();
   noStroke();
   fill(this.r,this.g,this.b);
-  //image(this.imgball,this.x, this.y, this.size, this.size);
-  //image(this.imgball,0, 0, 10, 10);
+  //image(this.imgballs,this.x, this.y, this.size, this.size);
+  //image(this.imgballs,0, 0, 10, 10);
   ellipse(this.x, this.y, this.size, this.size);
    pop();
 }
 
 // Angle calculation
-ball.prototype.followMe = function() {
+balls.prototype.followMe = function() {
   a = atan2(this.y - height/2, this.x - width/2);
   return a;
 }
 
-// Proportional distance of the balls
-ball.prototype.howFarIs = function() {
+// Proportional distance of the ballss
+balls.prototype.howFarIs = function() {
   length = dist(this.x, this.y, width/2, 6.2 *height/8)/15;
   return length;
 }
-// Calculating the velocity of the ball
-ball.prototype.calculateVelocity = function() {
+// Calculating the velocity of the balls
+balls.prototype.calculateVelocity = function() {
   this.vx = map(noise(this.tx),0,1,-maxSpeed,maxSpeed);
   this.vy = map(noise(this.ty),0,1,-maxSpeed,maxSpeed);
 }
