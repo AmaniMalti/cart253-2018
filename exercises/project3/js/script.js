@@ -1,5 +1,5 @@
 //This is a project that is just fun
-// It is an animation about a Chameleon that is following flys with his eyes and wants to eat them when they get closer
+// It is an animation about a Chameleon that is following balls with his eyes and wants to eat them when they get closer
 // By Amani Malti
 
 
@@ -16,16 +16,20 @@ var num_balls = 25;
 var img = [];
 var distances = [];
 var j=0;
-
 // Variable that defines max speed
 var maxSpeed = 15;
 // Variable that calculates the angle (in radians) from the fly position to the coordinate origin as measured from the positive x-axis
 var a = 0;
 // A fraction of the distance between the fly and the the center of the canvas
 var length = 30;
+// Sounds variable
+var fliesSound;
+var slurpSound;
 
 
 function preload() {
+   fliesSound = new Audio("assets/sounds/flies.wav");
+   slurpSound = new Audio("assets/sounds/slurp.mp3");
 }
 
 function setup() {
@@ -49,11 +53,13 @@ function setup() {
   	console.log(balls[1].r,balls[1].g,balls[1].b);
 }
 
+
 // Draw something so we can see it in the background
 function draw() {
   background(81,181,210);
   strokeWeight(4);
   if (balls.length == 0){
+    fliesSound.pause();
 	  leftEye.eyeBallColour = 0;
       leftEye.lashes = 1;
 	  rightEye.eyeBallColour = 0;
@@ -65,6 +71,7 @@ function draw() {
   rightEye.drawEyes();
   }
   else{
+  fliesSound.play();
   if (length < 18) {
 	drawFace_openJaw();
   }
@@ -103,6 +110,7 @@ function draw() {
 
   //tongue
   if (length < 15) {
+  slurpSound.play();
 	//drawFace_openJaw();
   //Added push and pop to make the stroke pink only on the tongue
   push();
