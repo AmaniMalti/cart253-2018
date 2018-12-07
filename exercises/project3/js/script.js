@@ -40,7 +40,7 @@ function setup() {
   rightEye = new Eyes(width/2 + 80);
     // Create the colored balls
   for (var i = 0; i < num_balls; i++) {
-    balls.push(new ball(random(0,width),random(0,height),20,25,40,150,random(0,1000),random(0,1000),getRandomInt(255),getRandomInt(255),getRandomInt(255),0));
+    balls.push(new balls(random(0,width),random(0,height),20,25,40,150,random(0,1000),random(0,1000),getRandomInt(255),getRandomInt(255),getRandomInt(255),0));
   }
   	console.log(balls[1].r,balls[1].g,balls[1].b);
 }
@@ -51,9 +51,9 @@ function draw() {
   strokeWeight(4);
   // Blink eyes when all the balls are eaten
   if (balls.length == 0){
-	  leftEye.eyeBallColour = 0;
+	  leftEye.eyeballsColour = 0;
       leftEye.lashes = 1;
-	  rightEye.eyeBallColour = 0;
+	  rightEye.eyeballsColour = 0;
       rightEye.lashes = 1
 	  drawFace_closedJaw();
   // Drawing the eyes in their position
