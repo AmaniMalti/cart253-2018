@@ -2,6 +2,7 @@
 // It is an animation about a Chameleon that is following flys with his eyes and wants to eat them when they get closer
 // By Amani Malti
 
+
 // Setting variables
 var canvas;
 // Variables for eyes
@@ -25,7 +26,6 @@ var length = 30;
 
 
 function preload() {
-
 }
 
 function setup() {
@@ -51,7 +51,7 @@ function setup() {
 
 // Draw something so we can see it in the background
 function draw() {
-  background(255);
+  background(81,181,210);
   strokeWeight(4);
   if (balls.length == 0){
 	  leftEye.eyeBallColour = 0;
