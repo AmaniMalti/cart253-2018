@@ -104,16 +104,19 @@ function draw() {
   //tongue
   if (length < 15) {
 	//drawFace_openJaw();
+  //Added push and pop to make the stroke pink only on the tongue
+  push();
   stroke('#fae');
 	strokeWeight(40);
-    line(width/2, 6.2 *height/8, balls[j].x, balls[j].y);
+  line(width/2, 6.2 *height/8, balls[j].x, balls[j].y);
+  pop();
 	balls.splice(j,1);
 	distances = [];
 	length = 30;
   }
   }
 }
-
+// Function that draws chamelon's face when the jaw is closed
 function drawFace_closedJaw(){
   // Drawing Chameleon's face
   fill('hsb(160, 100%, 50%)');
@@ -123,8 +126,8 @@ function drawFace_closedJaw(){
   triangle(3*width/8+30,3*height/4,width/2,7*height/8,5*width/8-30,3*height/4);
 
 }
-
-function drawFace_openJaw(){
+// Function that draws chamelon's face when the jaw is open
+  function drawFace_openJaw(){
   // Drawing Chameleon's face
   fill('hsb(160, 100%, 50%)');
   triangle(3*width/8,3*height/4,width/2,3*height/8,5*width/8,3*height/4);
