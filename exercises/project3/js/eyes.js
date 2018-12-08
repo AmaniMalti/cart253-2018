@@ -1,6 +1,8 @@
 // Eyes
 // A class that defines the eyes, the eye Flys, the eyelashes and that draws them
-function Eyes(x) {
+//function Eyes(x) {
+function Eyes(click,x,y,xb,yb,sizeX,sizeY,sizeShapeX,sizeShapeY,eyeBallColour,lashes) {
+// Eyes(0,x,height/2,x,height/2,eyeBallSize,eyeBallSize,eyeShapeSize,eyeShapeSize,eyeBallColour,lashes)
   this.click = 0;
   this.x = x;
   this.y = height/2;
@@ -73,6 +75,7 @@ function Eyes(x) {
     }
   }
 
+
   Eyes.prototype.rotate = function(angle, length) {
     //  Controlling the rotation of the eyes when following a target
     if (length < 20) this.xb = this.x + cos(angle)*length;
@@ -81,4 +84,5 @@ function Eyes(x) {
     else this.yb = this.y + sin(angle)*30;
     if (this.xb > this.x + 30 || this.xb < this.x - 30) this.xb = this.x + cos(angle)*30;
     if (this.yb > this.y + 30 || this.yb < this.y - 30) this.yb = this.y + sin(angle)*30;
+
 }
