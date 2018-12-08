@@ -73,7 +73,6 @@ function Eyes(x) {
     }
   }
 
-
   Eyes.prototype.rotate = function(angle, length) {
     //  Controlling the rotation of the eyes when following a target
     if (length < 20) this.xb = this.x + cos(angle)*length;
@@ -82,5 +81,4 @@ function Eyes(x) {
     else this.yb = this.y + sin(angle)*30;
     if (this.xb > this.x + 30 || this.xb < this.x - 30) this.xb = this.x + cos(angle)*30;
     if (this.yb > this.y + 30 || this.yb < this.y - 30) this.yb = this.y + sin(angle)*30;
-
 }

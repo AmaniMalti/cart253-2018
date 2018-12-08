@@ -52,8 +52,8 @@ ball.prototype.update = function() {
 ball.prototype.display = function() {
   imageMode(CENTER);
   push();
-  noStroke();  
-  fill(this.r,this.g,this.b); 
+  noStroke();
+  fill(this.r,this.g,this.b);
   //image(this.imgball,this.x, this.y, this.size, this.size);
   //image(this.imgball,0, 0, 10, 10);
   ellipse(this.x, this.y, this.size, this.size);
@@ -75,4 +75,10 @@ ball.prototype.howFarIs = function() {
 ball.prototype.calculateVelocity = function() {
   this.vx = map(noise(this.tx),0,1,-maxSpeed,maxSpeed);
   this.vy = map(noise(this.ty),0,1,-maxSpeed,maxSpeed);
+}
+ball.prototype.mouzeover = function() {
+  this.x += 20;
+  this.y += 20;
+  this.vx = -this.vx;
+  this.vy = -this.vy;
 }

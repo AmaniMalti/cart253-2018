@@ -16,8 +16,9 @@ var num_balls = 25;
 var img = [];
 var distances = [];
 var j=0;
+
 // Variable that defines max speed
-var maxSpeed = 15;
+var maxSpeed = 12;
 // Variable that calculates the angle (in radians) from the fly position to the coordinate origin as measured from the positive x-axis
 var a = 0;
 // A fraction of the distance between the fly and the the center of the canvas
@@ -26,10 +27,9 @@ var length = 30;
 var fliesSound;
 var slurpSound;
 
-
 function preload() {
-   fliesSound = new Audio("assets/sounds/flies.wav");
-   slurpSound = new Audio("assets/sounds/slurp.mp3");
+  fliesSound = new Audio("assets/sounds/flies.wav");
+  slurpSound = new Audio("assets/sounds/slurp.mp3");
 }
 
 function setup() {
@@ -50,9 +50,8 @@ function setup() {
   for (var i = 0; i < num_balls; i++) {
     balls.push(new ball(random(0,width),random(0,height),20,25,40,150,random(0,1000),random(0,1000),getRandomInt(255),getRandomInt(255),getRandomInt(255),0));
   }
-  	console.log(balls[1].r,balls[1].g,balls[1].b);
+  	//console.log(balls[1].r,balls[1].g,balls[1].b);
 }
-
 
 // Draw something so we can see it in the background
 function draw() {
@@ -60,22 +59,22 @@ function draw() {
   strokeWeight(4);
   if (balls.length == 0){
     fliesSound.pause();
-	  leftEye.eyeBallColour = 0;
-      leftEye.lashes = 1;
-	  rightEye.eyeBallColour = 0;
-      rightEye.lashes = 1
-	  drawFace_closedJaw();
+	  leftEye.eyeBallColour = '#FF0000';
+      //leftEye.lashes = 1;
+	  rightEye.eyeBallColour = '#FF0000';
+      //rightEye.lashes = 1
+	  drawFace_openJaw(7,13);
   // Drawing the eyes in their position
-  strokeWeight(1);
+  strokeWeight(4);
   leftEye.drawEyes();
   rightEye.drawEyes();
   }
   else{
-  fliesSound.play();
+    fliesSound.play();
   if (length < 18) {
-	drawFace_openJaw();
+    drawFace_openJaw(15,15);
   }
-  else drawFace_closedJaw();
+  else drawFace_openJaw(1,1);
   //
 
   // Drawing the eyes in their position
@@ -92,6 +91,9 @@ function draw() {
 		balls[i].display();
 		balls[i].tx += random(0.01,0.02);
 		balls[i].ty += random(0.01,0.03);
+		if(dist(balls[i].x, balls[i].y, mouseX, mouseY) < 70) {
+			balls[i].mouzeover();
+		}
   }
 
   length = min(distances);
@@ -110,38 +112,28 @@ function draw() {
 
   //tongue
   if (length < 15) {
-  slurpSound.play();
-	//drawFace_openJaw();
-  //Added push and pop to make the stroke pink only on the tongue
-  push();
-  stroke('#fae');
+    slurpSound.play();
+	drawFace_openJaw(37,37);
+	push();
+	fill(255,0,0);
 	strokeWeight(40);
-  line(width/2, 6.2 *height/8, balls[j].x, balls[j].y);
-  pop();
+    line(width/2, 6.2 *height/8, balls[j].x, balls[j].y);
+	pop();
 	balls.splice(j,1);
 	distances = [];
 	length = 30;
-  }
+   }
   }
 }
-// Function that draws chamelon's face when the jaw is closed
-function drawFace_closedJaw(){
-  // Drawing Chameleon's face
-  fill('hsb(160, 100%, 50%)');
-  triangle(3*width/8,3*height/4,width/2,3*height/8,5*width/8,3*height/4);
-  // Drawing Chameleon's jaw
-  fill('hsl(160, 100%, 50%)');
-  triangle(3*width/8+30,3*height/4,width/2,7*height/8,5*width/8-30,3*height/4);
 
-}
-// Function that draws chamelon's face when the jaw is open
-  function drawFace_openJaw(){
+function drawFace_openJaw(a,b){
   // Drawing Chameleon's face
   fill('hsb(160, 100%, 50%)');
   triangle(3*width/8,3*height/4,width/2,3*height/8,5*width/8,3*height/4);
   // Drawing Chameleon's jaw
   fill('hsl(160, 100%, 50%)');
-  triangle(3*width/8+30,3*height/4+30,width/2,7*height/8+30,5*width/8-30,3*height/4+30);
+  triangle(3*width/8+30,3*height/4+a,width/2,7*height/8+a,5*width/8-30,3*height/4+b);
+
 }
 
 // windowResized() is called by p5 whenever the window is resized!
